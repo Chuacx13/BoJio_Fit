@@ -1,8 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Login from '@/views/Login.vue'
 import SignUp from '@/views/SignUp.vue'
+import Home from '@/views/Home.vue'
+import Tracking from '@/views/Tracking.vue'
+import History from '@/views/History.vue'
+import SearchUsers from '@/views/SearchUsers.vue'
+import FriendRequests from '@/views/FriendRequests.vue'
+import Feed from '@/views/Feed.vue'
+import Friends from '@/views/Friends.vue'
+import Profile from '@/views/Profile.vue'
 
 const routes = [
+    {
+        path: '/',
+        name: 'Home',
+        component: Home
+    },
     {
         path: '/login',
         name: 'Login',
@@ -12,6 +25,41 @@ const routes = [
         path: '/signup',
         name: 'SignUp',
         component: SignUp
+    },
+    {
+        path: '/tracking',
+        name: 'Tracking',
+        component: Tracking
+    },
+    {
+        path: '/history',
+        name: 'History',
+        component: History
+    },
+    {
+        path: '/searchUsers',
+        name: 'SearchUsers',
+        component: SearchUsers
+    },
+    {
+        path: '/friendRequests',
+        name: 'FriendRequests',
+        component: FriendRequests
+    },
+    {
+        path: '/feed',
+        name: 'Feed',
+        component: Feed
+    }, 
+    {
+        path: '/friends',
+        name: 'Friends',
+        component: Friends
+    },
+    {
+        path: '/profile',
+        name: 'Profile',
+        component: Profile
     }
 ]
 const router = createRouter({

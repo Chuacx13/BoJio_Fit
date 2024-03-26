@@ -1,10 +1,7 @@
 <template>
     <Navbar/>
-    <div class = "home-view" v-if = "user">
-        <h3>This is the home Page</h3>
-    </div>
-    <div class = "home-view" v-else = "user">
-        <h3>Sign Up Now</h3>
+    <div class = "tracking-view">
+        <h3>This is the Tracking Page</h3>
     </div>
 </template>
   
@@ -13,7 +10,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Navbar from '@/components/Navbar.vue'
 
 export default {
-    name: "Home",
+    name: "Tracking",
 
     components: {
         Navbar
@@ -37,13 +34,5 @@ export default {
 </script>
 
 <style scoped>
-.home-view {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100%;
-    top: 0px;
-    background-image: url('@/assets/auth_background.png');
-}
+
 </style>

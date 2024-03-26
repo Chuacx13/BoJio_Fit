@@ -17,6 +17,7 @@ import { auth } from '@/firebase';
 
 export default {
     name: 'Login',
+    
     methods: {
         async login() {
             try {
