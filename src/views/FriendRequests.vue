@@ -1,5 +1,4 @@
 <template>
-    <Navbar/>
     <div class = "friendRequests-view">
         <h3>This is the Friend Requests Page</h3>
     </div>

@@ -55,21 +55,25 @@ export default {
 <style>
 .navbar {
     display: flex;
-    justify-content: space-between; 
+    justify-content: center; 
     align-items: center;
     width: 100%;
+    height: 100px;
     position: fixed; 
     z-index: 1000; 
     background-color: transparent;
 }
+
 .nav-route.router-link-active {
     color: orange; 
 }
+
 .navbar-logo {
     height: 150px; 
     width: auto; 
     margin-top: 20px; 
 }
+
 .nav-route, #btn {
     color: white;
     padding: 20px 50px 20px 50px; 
@@ -79,26 +83,24 @@ export default {
     font-size: 20px; 
     font-weight: bold; 
 }
+
 .nav-route:hover, #btn:hover {
     background-color: rgba(255, 255, 255, 0.2); 
     color: white; 
 }
+
 #btn {
-    padding: 20px 50px 20px 50px;
-    font-size: 20px;
     background-color: transparent;
-    color: white;
     border: none;
     cursor: pointer;
     text-decoration: none;
-    transition: padding 0.3s, background-color 0.3s;
-    font-family: monospace;
-    font-weight: bold; 
 }
+
 #btn:hover {
     color: white;
     background-color: rgb(195, 195, 188);
 }
+
 .profile-link {
     border: 1px solid white;
 }

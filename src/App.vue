@@ -4,10 +4,12 @@
 </template> 
 
 <script> 
+import Navbar from './components/Navbar.vue';
 
 export default {
     name: 'App',
     components: {
+        Navbar
     }
 }
 </script>
@@ -17,6 +19,7 @@ export default {
     padding: 0px;
     margin: 0px;
 }
+
 html, body {
   margin: 0;
   padding: 0;
