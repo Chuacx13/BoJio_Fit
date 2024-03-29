@@ -43,7 +43,7 @@ export default {
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 100vh; 
+  min-height: 100vh; /* This will make sure the .home-view takes minimum of the full viewport height */
   background-image: url('@/assets/home_background.png');
   background-size: cover;
   background-position: center center; 
