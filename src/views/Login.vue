@@ -7,17 +7,42 @@
                 <input type="password" v-model="password" placeholder="Password" required>
             <button type="submit" class="login-button">Login</button>
             </form>
+            <p> ---- Or Sign In using Google ---- </p>
+            <div id="firebaseui-auth-container"></div>
         </div>
     </div>
 </template>
   
 <script>
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/firebase';
+import firebase from '@/uifire.js';
+import * as firebaseui from 'firebaseui';
+import 'firebaseui/dist/firebaseui.css';
 
 export default {
     name: 'Login',
     
+    mounted() {
+        var ui = firebaseui.auth.AuthUI.getInstance();
+        if (!ui) {
+            ui = new firebaseui.auth.AuthUI(firebase.auth());
+        }
+
+        var uiConfig = {
+            signInSuccessUrl: '/',
+            signInOptions: [
+                {
+                    provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                    fullLabel: 'Sign Up with Google',
+                    buttonColor: 'black'
+                }
+            ],
+        }
+
+        ui.start('#firebaseui-auth-container', uiConfig);
+    },
+
     methods: {
         async login() {
             try {
@@ -56,10 +81,12 @@ export default {
     font-size: 2em;
     text-align: center;
     margin: 0px 0px 2rem 0px;
+    font-weight: 900;
 }
   
 .form-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background: white;
@@ -68,7 +95,7 @@ export default {
     width: 100%;
     max-width: 300px; 
     height: 100%;
-    max-height: 280px;
+    max-height: 320px;
 }
   
 input {
@@ -88,12 +115,19 @@ input {
     border: none;
     border-radius: 4px;
     font-size: 1rem;
+    font-weight: 900;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
+    margin-bottom: 1rem;
+}
 
 .login-button:hover {
     background-color: rgb(216, 124, 3); 
+}
+
+p {
+    margin: 0px;
+    font-weight: 900;
 }
 </style>
   
