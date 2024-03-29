@@ -6,14 +6,9 @@
   
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Navbar from '@/components/Navbar.vue'
 
 export default {
     name: "FriendRequests",
-
-    components: {
-        Navbar
-    }, 
 
     data() {
         return {
