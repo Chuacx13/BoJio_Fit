@@ -1,5 +1,4 @@
 <template>
-    <Navbar/>
     <div class="history-view" v-if="user">
         <div class="left-text">
             <h3><span class="orange-text">WORKOUT</span><br/><span class="white-text">HISTORY</span></h3>
@@ -25,14 +24,9 @@
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Navbar from '@/components/Navbar.vue'
 
 export default {
     name: "History",
-
-    components: {
-        Navbar
-    }, 
 
     data() {
         return {
