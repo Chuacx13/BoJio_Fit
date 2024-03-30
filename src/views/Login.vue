@@ -34,7 +34,7 @@ export default {
             signInOptions: [
                 {
                     provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                    fullLabel: 'Sign Up with Google',
+                    fullLabel: 'Sign In with Google',
                     buttonColor: 'black'
                 }
             ],
