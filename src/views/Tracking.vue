@@ -56,6 +56,15 @@ export default {
             this.exercises.pop();
         },
 
+        // How document for workouts look:
+        // workoutList: [{
+        //     timestamp: new Date(),
+        //     exercises: [{
+        //         name: '',
+        //         sets: [{ weight: null, reps: null }]
+        //     }],
+        //     duration: this.duration
+        // }]
         async saveWorkout() {
             // Get database
             const db = getFirestore();
