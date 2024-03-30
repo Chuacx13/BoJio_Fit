@@ -23,6 +23,13 @@ import 'firebaseui/dist/firebaseui.css';
 export default {
     name: 'Login',
     
+    data() {
+        return {
+            email: '',
+            password: ''
+        }
+    },
+
     mounted() {
         var ui = firebaseui.auth.AuthUI.getInstance();
         if (!ui) {

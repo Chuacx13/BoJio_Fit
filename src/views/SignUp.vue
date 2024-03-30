@@ -25,6 +25,13 @@ import 'firebaseui/dist/firebaseui.css';
 export default {
     name: 'SignUp',
 
+    data() {
+        return {
+            email: '',
+            password: ''
+        }
+    },
+    
     mounted() {
         var ui = firebaseui.auth.AuthUI.getInstance();
         if (!ui) {
