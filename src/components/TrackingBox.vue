@@ -1,7 +1,7 @@
 <template>
     <div id="tracking-box">
-        <input type="text" id="name-input" v-model="exerciseName" placeholder="Name of Exercise" required>
-        <div id="workout-details" v-for="(set, index) in sets" :key="index">
+        <input type="text" id="name-input" v-model="exercise.name" placeholder="Name of Exercise" required>
+        <div id="workout-details" v-for="(set, index) in exercise.sets" :key="index">
             <input type="number" id="weight-input" v-model="set.weight" placeholder="Weight" required>
             <input type="number" id="reps-input" v-model="set.reps" placeholder="Reps" required>
         </div>
@@ -16,23 +16,18 @@
 export default {
     name: "TrackingBox",
 
-    data() {
-        return {
-            exerciseName: '',
-            sets: [
-                { weight: null, reps: null }
-            ]
-        }
+    props: {
+        exercise: Object
     },
 
     methods: {
         addSet() {
-            this.sets.push({ weight: null, reps: null });
+            this.exercise.sets.push({ weight: null, reps: null });
         },
 
         deleteSet() {
-            if (this.sets.length > 1) {
-                this.sets.pop();
+            if (this.exercise.sets.length > 1) {
+                this.exercise.sets.pop();
             }
         }
     }
@@ -48,6 +43,7 @@ export default {
     padding: 20px;
     background: white;
     border-radius: 8px;
+    margin-bottom: 20px;
 }
 
 #workout-details, #tracking-buttons {
@@ -68,8 +64,7 @@ export default {
     padding: 6px;
 }
 
-#add-button {
-    background-color: orange;
+#add-button, #delete-button {
     border-radius: 10px;
     border: none;
     color: white;
@@ -79,14 +74,11 @@ export default {
     width: 100px;
 }
 
+#add-button {
+    background-color: orange;
+}
+
 #delete-button {
     background-color: red;
-    border-radius: 10px;
-    border: none;
-    color: white;
-    padding: 6px;
-    margin: 10px;
-    cursor: pointer;
-    width: 100px;
 }
 </style>
