@@ -9,6 +9,8 @@
                 <input type="password" v-model="confirmPassword" placeholder="Confirm Password" required>
             <button type="submit" class="signup-button">Sign Up</button>
             </form>
+            <p> ---- Or Connect using Google ---- </p>
+            <div id="firebaseui-auth-container"></div>
         </div>
     </div>
 </template>
@@ -16,9 +18,33 @@
 <script>
 import { auth } from '@/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import firebase from '@/uifire.js';
+import * as firebaseui from 'firebaseui';
+import 'firebaseui/dist/firebaseui.css';
 
 export default {
     name: 'SignUp',
+
+    mounted() {
+        var ui = firebaseui.auth.AuthUI.getInstance();
+        if (!ui) {
+            ui = new firebaseui.auth.AuthUI(firebase.auth());
+        }
+
+        var uiConfig = {
+            signInSuccessUrl: '/',
+            signInOptions: [
+                {
+                    provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                    fullLabel: 'Sign Up with Google',
+                    buttonColor: 'black'
+                }
+            ]
+        }
+
+        ui.start('#firebaseui-auth-container', uiConfig);
+    },
+
     methods: {
         async signup() {
             try {
@@ -63,10 +89,12 @@ export default {
     font-size: 2em;
     text-align: center;
     margin: 0px 0px 2rem 0px;
+    font-weight: 900;
 }
   
 .form-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background: white;
@@ -75,7 +103,7 @@ export default {
     width: 100%;
     max-width: 340px; 
     height: 100%;
-    max-height: 400px;
+    max-height: 460px;
 }
   
 input {
@@ -95,12 +123,19 @@ input {
     border: none;
     border-radius: 4px;
     font-size: 1rem;
+    font-weight: 900;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
+    margin-bottom: 1rem;
+}
 
 .signup-button:hover {
     background-color: rgb(216, 124, 3); 
+}
+
+p {
+    margin: 0px;
+    font-weight: 900;
 }
 </style>
   

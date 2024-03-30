@@ -1,5 +1,4 @@
 <template>
-    <Navbar/>
     <div class = "friendRequests-view">
         <h3>This is the Friend Requests Page</h3>
     </div>
@@ -7,14 +6,9 @@
   
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Navbar from '@/components/Navbar.vue'
 
 export default {
     name: "FriendRequests",
-
-    components: {
-        Navbar
-    }, 
 
     data() {
         return {

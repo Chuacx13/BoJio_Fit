@@ -1,5 +1,4 @@
 <template>
-    <Navbar/>
     <div class = "profile-view">
         <h3>This is the Profile Page</h3>
     </div>
@@ -43,17 +42,12 @@
   
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Navbar from '@/components/Navbar.vue'
 // import firebase from 'firebase/app';
 // import 'firebase/auth';
 // import 'firebase/firestore';
 
 export default {
     name: "Profile",
-
-    components: {
-        Navbar
-    }, 
 
     data() {
         return {
