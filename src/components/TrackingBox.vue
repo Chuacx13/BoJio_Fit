@@ -1,29 +1,48 @@
 <template>
     <div id="tracking-box">
-        <form @submit.prevent="saveWorkout">
-            <input type="text" id="name-input" v-model="exerciseName" placeholder="Name of Exercise" required>
-            <div id="workout-details">
-                <input type="number" id="weight-input" v-model="weight" placeholder="Weight" required>
-                <input type="number" id="reps-input" v-model="reps" placeholder="Reps" required>
-            </div>
-            <div id="tracking-buttons">
-                <button type="button" id="add-button"> Add Set </button>
-                <button type="button" id="delete-button"> Delete Set </button>
-            </div>
-        </form>
+        <input type="text" id="name-input" v-model="exerciseName" placeholder="Name of Exercise" required>
+        <div id="workout-details" v-for="(set, index) in sets" :key="index">
+            <input type="number" id="weight-input" v-model="set.weight" placeholder="Weight" required>
+            <input type="number" id="reps-input" v-model="set.reps" placeholder="Reps" required>
+        </div>
+        <div id="tracking-buttons">
+            <button type="button" id="add-button" @click="addSet"> Add Set </button>
+            <button type="button" id="delete-button" @click="deleteSet"> Delete Set </button>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
     name: "TrackingBox",
-    methods: {}
+
+    data() {
+        return {
+            exerciseName: '',
+            sets: [
+                { weight: null, reps: null }
+            ]
+        }
+    },
+
+    methods: {
+        addSet() {
+            this.sets.push({ weight: null, reps: null });
+        },
+
+        deleteSet() {
+            if (this.sets.length > 1) {
+                this.sets.pop();
+            }
+        }
+    }
 }
 </script>
 
 <style scoped>
 #tracking-box {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     text-align: center;
     padding: 20px;
