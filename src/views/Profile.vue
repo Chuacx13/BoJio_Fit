@@ -1,34 +1,33 @@
 <template>
     <div class = "profile-view">
-        <h3>This is the Profile Page</h3>
-    </div>
-    <div class = "user-info">
-        <div class="user-item">
-            <strong>John Doe</strong> 
-            <!-- {{ user.name }} -->
+        <div class = "user-info">
+            <div class="user-item">
+                <strong>John Doe</strong> 
+                <!-- {{ user.name }} -->
+            </div>
+            <div class="user-item">
+                <strong>Age:</strong> 
+                <!-- {{ user.age }} -->
+            </div>
+            <div class="user-item">
+                <strong>Gender:</strong> 
+                <!-- {{ user.gender }} -->
+            </div>
+            <div class="user-item">
+                <strong>Height:</strong> 
+                <!-- {{ user.height }} -->
+            </div>
+            <div class="user-item">
+                <strong>Weight:</strong> 
+                <!-- {{ user.weight }} -->
+            </div>
+            <div class="user-item">
+                <strong>Tele:</strong> 
+                <!-- {{ user.telegram }} -->
+            </div>
+            <router-link class="nav-route" to="/editProfile" exact>Edit Profile</router-link>
         </div>
-        <div class="user-item">
-            <strong>Age:</strong> 
-            <!-- {{ user.age }} -->
-        </div>
-        <div class="user-item">
-            <strong>Gender:</strong> 
-            <!-- {{ user.gender }} -->
-        </div>
-        <div class="user-item">
-            <strong>Height:</strong> 
-            <!-- {{ user.height }} -->
-        </div>
-        <div class="user-item">
-            <strong>Weight:</strong> 
-            <!-- {{ user.weight }} -->
-        </div>
-        <div class="user-item">
-            <strong>Tele:</strong> 
-            <!-- {{ user.telegram }} -->
-        </div>
-        <router-link class="nav-route" to="/editProfile" exact>Edit Profile</router-link>
-    </div>
+    </div>    
     <div class="numberOfWorkouts">
         <!-- link to no. of workouts -->
     </div>
@@ -88,9 +87,28 @@ export default {
     display:flex;
     flex-direction: row;
     margin-left: 10vw;
+    margin-top: 15vh;
 }
 
 .user-item {
     margin-right: 10vw;
+    color: white;
+}
+
+.profile-view {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh; 
+  background-image: url('@/assets/home_background.png');
+  background-size: cover;
+  background-position: center center; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed;
+  text-align: center; 
+}
+
+.nav-route {
+    height: 5vh;
 }
 </style>
