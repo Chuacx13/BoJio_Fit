@@ -23,6 +23,13 @@ import 'firebaseui/dist/firebaseui.css';
 export default {
     name: 'Login',
     
+    data() {
+        return {
+            email: '',
+            password: ''
+        }
+    },
+
     mounted() {
         var ui = firebaseui.auth.AuthUI.getInstance();
         if (!ui) {
@@ -34,7 +41,7 @@ export default {
             signInOptions: [
                 {
                     provider: firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                    fullLabel: 'Sign Up with Google',
+                    fullLabel: 'Sign In with Google',
                     buttonColor: 'black'
                 }
             ],
