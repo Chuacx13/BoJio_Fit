@@ -9,6 +9,7 @@ import FriendRequests from '@/views/FriendRequests.vue'
 import Feed from '@/views/Feed.vue'
 import Friends from '@/views/Friends.vue'
 import Profile from '@/views/Profile.vue'
+import EditProfile from '@/views/EditProfile.vue'
 
 const routes = [
     {
@@ -60,6 +61,11 @@ const routes = [
         path: '/profile',
         name: 'Profile',
         component: Profile
+    },
+    {
+        path: '/editProfile',
+        name: 'EditProfile',
+        component: EditProfile
     }
 ]
 const router = createRouter({
