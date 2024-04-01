@@ -43,10 +43,9 @@ export default {
     methods: {
         signOut() {
             const auth = getAuth();
-            const user = auth.currentUser;
-            signOut(auth, user)
-            this.$router.push('/');
-            window.location.reload();
+            signOut(auth, this.user);
+            this.user = false;
+            this.$router.push('/login');
         }
     }
 }
@@ -76,11 +75,11 @@ export default {
 
 .nav-route, #btn {
     color: white;
-    padding: 20px 50px 20px 50px; 
+    padding: 10px 40px 10px 40px; 
     text-decoration: none;
     font-family: monospace;
     transition: background-color 0.3s, color 0.3s;
-    font-size: 20px; 
+    font-size: 18px; 
     font-weight: bold; 
 }
 
