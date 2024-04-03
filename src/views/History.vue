@@ -6,24 +6,40 @@
         <div class="encouragement-text">
             <p>Review your workout history to<br/>find out how much you have<br/>improved over time!</p>
         </div>
-        <div class="workout-history">
-            <div v-for="(workout, index) in workoutHistory" :key="index" class="workout-item">
-                <div class="workout-item-content">
-                    <p>Workout{{ workout.number }}</p>
-                    <p>Date: {{ workout.date }}</p>
-                    <p>Exercise: {{ workout.exercise }}</p>
-                    <p>Reps: {{ workout.reps }}</p>
+        <div class ="search-bar"> 
+            <input type = "date" v-model="selectedDate" @change="searchWorkouts" /> 
+        </div>
+        <div v-if="workoutsByDate.length > 0">
+            <ul>
+                <li v-for="(workout, index) in workoutsByDate" :key="index">
+                    <button @click="showWorkoutDetails(workout.number)">{{ workout.date }}</button>
+                </li>
+            </ul>
+        </div>
+        <div v-else>
+            <p class ="no-workouts">No workouts found for the selected date.</p>
+        </div>
+        <div class="workout-details" v-if="selectedWorkout">
+            <h2>Workout {{ selectedWorkout.number }}</h2>
+                <p>Date: {{ selectedWorkout.date }}</p>
+                <p>Duration: {{ selectedWorkout.duration }} minutes</p>
+                <div v-for="(exercise, exerciseIndex) in selectedWorkout.exercises" :key = "exerciseIndex"> 
+                    <p>Exercise: {{ exercise.name }}</p>
+                    <div v-for="(set, setIndex) in exercise.sets" :key = "setIndex"> 
+                        <p>Set {{ setIndex + 1 }}: <br>Weight: {{ set.weight }}kg, Reps: {{ set.reps }}</p>
+                    </div>
                 </div>
+                <button @click="closeWorkoutDetails">Close</button>
             </div>
         </div>
-    </div>
-    <div class="history-view" v-else>
-        <h3>Sign Up Now</h3>
-    </div>
+        <div class="history-view" v-else>
+            <h3>Sign Up Now</h3>
+        </div>
 </template>
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getDoc, getFirestore, doc} from "firebase/firestore";
 
 export default {
     name: "History",
@@ -31,23 +47,53 @@ export default {
     data() {
         return {
             user: false,
-            workoutHistory: [
-                { number: 1, date: '2024-01-01', exercise: 'bicep curls', reps: '12' },
-                { number: 2, date: '2024-01-02', exercise: 'bench press', reps: '12' },
-                { number: 3, date: '2024-01-03', exercise: 'hammer curls', reps: '12' },
-            ]
-        }
+            selectedDate: null, 
+            workoutsByDate: [],
+            selectedWorkout: null,
+        };
     }, 
 
     mounted() {
         const auth = getAuth();
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                this.user = user;
+                this.user = true; 
+                this.fetchWorkoutHistory(user.uid);
             }
         })
     },
-}
+
+    methods: { 
+        async searchWorkouts() { 
+            if(!this.selectedDate === null) return; 
+            const db = getFirestore(); 
+            const workoutRef = doc(db, 'Workouts', this.user.uid); 
+
+            try { 
+                const doc = await getDoc(workoutRef); 
+                if (doc.exists()) { 
+                    const workouts = doc.data().workoutList;
+                    this.workoutsByDate = workouts.filter(
+                        (workout) =>
+                        workout.timestamp.toDate().toLocaleDateString() ===
+                        this.selectedDate
+                    );
+                }
+            } catch (error) { 
+                console.error(error); 
+            }
+         }, 
+        showWorkoutDetails(workoutNumber) {
+            this.selectedWorkout = this.workoutsByDate.find(
+                (workout) => workout.number === workoutNumber
+            );
+        }, 
+
+        closeWorkoutDetails() { 
+            this.selectedWorkout = null;
+        }, 
+    }, 
+}; 
 </script>
 
 <style scoped>
@@ -110,24 +156,26 @@ export default {
     white-space: nowrap; 
 }
 
-.workout-history {
-    display: flex; 
-    flex-direction: row; /* Display items in a row */
-    justify-content: flex-end;
-    position: absolute;
-    right: 5%;
-    width: 100%; 
-    text-align: left;
+.search-bar {
+    position: absolute;  
+    top: 120px; 
+    width: 150px; 
 }
 
-.workout-item {
-    margin-bottom: 20px; /* Add margin between items */
-    margin-left: 20px;
+.search-bar input[type="date"] {
+    width: 100%; /* Take up full width of parent */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.workout-item-content {
-    border: 1px solid white; /* Add border */
-    padding: 30px; /* Add padding */
-    background-color: white;
+.no-workouts {
+    position: absolute; 
+    color: white; 
+    font-size: 1.5vw; 
+    right: 30%; 
+    width: 30vw; 
 }
+
 </style>
+
