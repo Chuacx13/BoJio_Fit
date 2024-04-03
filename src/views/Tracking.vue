@@ -119,11 +119,11 @@ export default {
     text-align: center;
     background-color: rgb(46, 46, 46);
     min-height: 100vh;
-    padding-top: 150px;
 }
 
 .tracking-header {
     color: orange;
+    margin-top: 120px;
     margin-bottom: 20px;
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar" v-if = "user">
+    <nav class="navbar" :class="{'navbar-transparent': isTransparent}" v-if = "user">
         <img class="navbar-logo" :src="logo" alt="BoJio Fit Logo"> 
         <router-link class="nav-route" to="/" exact>HOME</router-link>
         <router-link class="nav-route" to="/tracking" exact>TRACKING</router-link>
@@ -12,7 +12,7 @@
         <router-link class="nav-route profile-link" to="/profile" exact>PROFILE</router-link>
         <button id = "btn" @click="signOut()"> LOGOUT </button>
     </nav>
-    <nav class="navbar" v-else>
+    <nav class="navbar" :class="{'navbar-transparent': isTransparent}" v-else>
         <router-link class="nav-route" to="/" exact>Home</router-link>
         <router-link class="nav-route" to="/login">Login</router-link>
         <router-link class="nav-route" to="/signup">Sign Up</router-link>
@@ -48,6 +48,13 @@ export default {
             this.user = false;
             this.$router.push('/login');
         }
+    }, 
+
+    computed: {
+        isTransparent() {
+            const routes = ['/', '/login', '/signup'];
+            return routes.includes(this.$route.path);
+        }
     }
 }
 </script>
@@ -61,6 +68,12 @@ export default {
     height: 100px;
     position: fixed; 
     z-index: 1000; 
+    background-color: rgb(46, 46, 46);
+    right: 17px;
+    box-sizing: border-box;
+}
+
+.navbar-transparent{
     background-color: transparent;
 }
 
