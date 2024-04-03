@@ -2,11 +2,13 @@
     <div class="tracking-view">
         <form @submit.prevent="saveWorkout">
             <h1 class="tracking-header"> Workout </h1>
+            <input type="text" id="workout-name-input" v-model="workoutName" placeholder="Name your Workout!" required>
+            <input type="date" id="date-input" v-model="date" placeholder="Date" required>
             <input type="number" id="duration-input" v-model="duration" placeholder="Duration(in minutes)" required>
             <div id="exercise-list" v-for="(exercise, index) in exercises" :key="index">
                 <TrackingBox :key="index" :exercise="exercise"/>
             </div>
-            <div id="tracking-button">
+            <div id="tracking-buttons">
                 <button type="button" id="add-button" @click="addExercise"> Add Exercise </button>
                 <button type="button" id="delete-button" @click="deleteExercise"> Delete Exercise </button>
             </div>
@@ -31,6 +33,8 @@ export default {
             user: false,
             exercises: [],
             duration: '',
+            workoutName: '',
+            date: false
         }
     }, 
 
@@ -79,7 +83,8 @@ export default {
                 if (docSnap.exists()) {
                     const currentData = docSnap.data();
                     const updatedWorkoutList = [...currentData.workoutList, {
-                        timestamp: new Date(),
+                        date: this.date,
+                        workoutName: this.workoutName,
                         exercises: this.exercises,
                         duration: this.duration
                     }];
@@ -89,7 +94,8 @@ export default {
                 } else {
                     await setDoc(workoutDocRef, {
                         workoutList: [{
-                            timestamp: new Date(),
+                            date: this.date,
+                            workoutName: this.workoutName,
                             exercises: this.exercises,
                             duration: this.duration
                         }]
@@ -113,11 +119,11 @@ export default {
     text-align: center;
     background-color: rgb(46, 46, 46);
     min-height: 100vh;
+    padding-top: 150px;
 }
 
 .tracking-header {
     color: orange;
-    margin-top: 150px;
     margin-bottom: 20px;
 }
 
@@ -134,7 +140,8 @@ export default {
     color: white;
     margin: 10px;
     cursor: pointer;
-    width: 100px;
+    min-width: 100px;
+    min-height: 30px;
 }
 
 #add-button {
@@ -149,7 +156,7 @@ export default {
     background-color: rgb(53, 170, 53);
 }
 
-#duration-input {
+#duration-input, #workout-name-input, #date-input {
     border-radius: 8px;
     min-width: 140px;
     margin: 10px;
