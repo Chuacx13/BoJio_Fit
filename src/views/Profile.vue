@@ -2,28 +2,22 @@
     <div class = "profile-view">
         <div class = "user-info">
             <div class="user-item">
-                <strong>John Doe</strong> 
-                <!-- {{ user.name }} -->
+                <strong>{{ userInfo.Name }}</strong>
             </div>
             <div class="user-item">
-                <strong>Age:</strong> 
-                <!-- {{ user.age }} -->
+                <strong>Age: {{ userInfo.Age }}</strong>
             </div>
             <div class="user-item">
-                <strong>Gender:</strong> 
-                <!-- {{ user.gender }} -->
+                <strong>Gender: {{ userInfo.Gender }}</strong>
             </div>
             <div class="user-item">
-                <strong>Height:</strong> 
-                <!-- {{ user.height }} -->
+                <strong>Height: {{ userInfo.Height }}</strong> 
             </div>
             <div class="user-item">
-                <strong>Weight:</strong> 
-                <!-- {{ user.weight }} -->
+                <strong>Weight: {{ userInfo.Weight }}</strong> 
             </div>
             <div class="user-item">
-                <strong>Tele:</strong> 
-                <!-- {{ user.telegram }} -->
+                <strong>Tele: {{ userInfo.Telegram }}</strong> 
             </div>
             <router-link class="nav-route" to="/editProfile" exact>Edit Profile</router-link>
         </div>
@@ -41,6 +35,7 @@
   
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 // import firebase from 'firebase/app';
 // import 'firebase/auth';
 // import 'firebase/firestore';
@@ -51,34 +46,32 @@ export default {
     data() {
         return {
             user: false,
+            userInfo: []
         }
     }, 
 
-    mounted() {
+    async mounted() {
         const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
-                this.user = user;
+                 this.user = user
+                 await this.fetchUserInfo();
             }
         })
+    },
+
+    methods: {
+        async fetchUserInfo() {
+            const db = getFirestore()
+            const UserInfoRef = doc(db, "User_Info", this.user.uid);
+            const docSnap = await getDoc(UserInfoRef);
+            if (docSnap.exists()) {
+                this.userInfo = docSnap.data();
+            } else {
+                console.error("User information not found");
+            }
+        }
     }
-    // created() {
-    //     this.fetchUserDetails();
-    // },
-    // methods: {
-    //     fetchUserDetails() {
-    //         const user = firebase.auth().currentUser;
-    //         if (user) {
-    //             firebase.firestore().collection('users').doc(user.uid).get().then(doc => {
-    //                 if (doc.exists) {
-    //                     this.user = doc.data();
-    //                 }
-    //             }).catch(error => {
-    //                 console.error('No user logged in.');
-    //             })
-    //         }
-    //     }
-    // }
 }
 </script>
 
@@ -87,12 +80,24 @@ export default {
     display:flex;
     flex-direction: row;
     margin-left: 10vw;
-    margin-top: 15vh;
+    margin-top: 120px;
+    width: 80%;
+    align-items: flex-start;
 }
 
 .user-item {
-    margin-right: 10vw;
+    display: flex;
+    margin-right: 5vw;
     color: white;
+}
+
+.user-item strong {
+    min-width: 100px; /* Adjust the width as needed */
+}
+
+.user-item span {
+    flex: 1; /* Expand to fill remaining space */
+    text-align: right; /* Align text to the right */
 }
 
 .profile-view {
@@ -110,5 +115,11 @@ export default {
 
 .nav-route {
     height: 5vh;
+    background-color: orange;
+    border-radius: 10px;
+    border: none;
+    padding: 15px 10px 0px 10px;
+    cursor: pointer;
+    display: inline-block;
 }
 </style>
