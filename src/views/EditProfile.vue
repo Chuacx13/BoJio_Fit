@@ -5,15 +5,15 @@
             <div class="form">    
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" id="name" v-model="formData.name" required>
+                    <input type="text" id="name" v-model="name" required>
                 </div>
                 <div class="form-group">
                     <label for="age">Age:</label>
-                    <input type="number" id="age" v-model="formData.age" required>
+                    <input type="number" id="age" v-model="age" required>
                 </div>
                 <div class="form-group">
                     <label for="gender">Gender:</label>
-                    <select id="gender" v-model="formData.gender" required>
+                    <select id="gender" v-model="gender" required>
                         <option value="">Select Gender</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -22,15 +22,15 @@
                 </div>
                 <div class="form-group">
                     <label for="height">Height:</label>
-                    <input type="number" id="height" v-model="formData.height" required>
+                    <input type="number" id="height" v-model="height" required>
                 </div>
                 <div class="form-group">
                     <label for="weight">Weight:</label>
-                    <input type="number" id="weight" v-model="formData.weight" required>
+                    <input type="number" id="weight" v-model="weight" required>
                 </div>
                 <div class="form-group">
                     <label for="tele">Telegram Handle:</label>
-                    <input type="text" id="tele" v-model="formData.telegram" required>
+                    <input type="text" id="telegram" v-model="telegram" required>
                 </div>
                 <button type="submit">Save</button>
             </div>    
@@ -41,6 +41,7 @@
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Navbar from '@/components/Navbar.vue'
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 export default {
     name: "EditProfile",
@@ -51,15 +52,13 @@ export default {
 
     data() {
         return {
-            user: false,
-            formData: {
-                name: '',
-                age: null,
-                gender: '',
-                height: null,
-                weight: null,
-                telegram: ''
-            }
+             user: false,
+             name: '',
+             age: '',
+             gender: '',
+             height: '',
+             weight: '',
+             telegram: ''
         }
     }, 
 
@@ -71,10 +70,39 @@ export default {
             }
         })
     },
+    
     methods: {
-        submitForm() {
-            // save values into FS
-            this.$router.push({ name: 'Home'});
+        async submitForm() {
+            const db = getFirestore();
+            // Get document reference from "Workouts" collection with unique "uid" document 
+            const UserInfoDocRef = doc(db, 'User_Info', this.user.uid);
+
+            try {
+                const docSnap = await getDoc(UserInfoDocRef);
+
+                if (docSnap.exists()) {
+                    await setDoc(UserInfoDocRef, {
+                         Name: this.name,
+                         Age: this.age,
+                         Gender: this.gender,
+                         Height: this.height,
+                         Weight: this.weight,
+                         Telegram: this.telegram
+                    })
+                } else {
+                    await setDoc(UserInfoDocRef, {
+                         Name: this.name,
+                         Age: this.age,
+                         Gender: this.gender,
+                         Height: this.height,
+                         Weight: this.weight,
+                         Telegram: this.telegram
+                    });
+                }
+                this.$router.push({ name: 'Home'});
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 }

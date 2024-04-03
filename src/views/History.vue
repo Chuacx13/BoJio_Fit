@@ -1,127 +1,126 @@
 <template>
-    <div class="history-view" v-if="user">
+    <div class="container">
+      <div class="left-container">
         <div class="left-text">
-            <h3><span class="orange-text">WORKOUT</span><br/><span class="white-text">HISTORY</span></h3>
+          <h3><span class="orange-text">WORKOUT</span><br/><span class="white-text">HISTORY</span></h3>
         </div>
         <div class="encouragement-text">
-            <p>Review your workout history to<br/>find out how much you have<br/>improved over time!</p>
+          <p>Review your workout history to<br>find out how much you have<br>improved over time!</p>
         </div>
-        <div class ="search-bar"> 
-            <input type = "date" v-model="selectedDate" @change="searchWorkouts" /> 
-        </div>
-        <div v-if="workoutsByDate.length > 0">
+      </div>
+  
+      <div class="right-container">
+        <label for="workoutName">Workout Name:</label>
+        <input type ="text" v-model="searchQuery" placeholder = "Search by workout name">
+        <label for="startDate">Start Date:</label>
+        <input type="date" v-model="startDate" placeholder="Start Date">
+        <label for="endDate">End Date:</label>
+        <input type="date" v-model="endDate" placeholder="End Date">
+        <div v-if="filteredWorkouts.length > 0">
+          <div class="workout-entry" v-for="(workout, index) in filteredWorkouts" :key="index">
+            <h2>{{ workout.date }}: {{ workout.workoutName }}</h2>
+            <p>Duration: {{ workout.duration }} minutes</p>
             <ul>
-                <li v-for="(workout, index) in workoutsByDate" :key="index">
-                    <button @click="showWorkoutDetails(workout.number)">{{ workout.date }}</button>
-                </li>
+              <li v-for="(exercise, eIndex) in workout.exercises" :key="eIndex">
+                {{ exercise.name }}:
+                <ul>
+                  <li v-for="(set, sIndex) in exercise.sets" :key="sIndex">
+                    Set {{ sIndex + 1 }}: {{ set.weight }} Kg x {{ set.reps }} reps
+                  </li>
+                </ul>
+              </li>
             </ul>
+            <button @click="deleteWorkout(index)">Delete Workout</button>
+          </div>
         </div>
-        <div v-else>
-            <p class ="no-workouts">No workouts found for the selected date.</p>
-        </div>
-        <div class="workout-details" v-if="selectedWorkout">
-            <h2>Workout {{ selectedWorkout.number }}</h2>
-                <p>Date: {{ selectedWorkout.date }}</p>
-                <p>Duration: {{ selectedWorkout.duration }} minutes</p>
-                <div v-for="(exercise, exerciseIndex) in selectedWorkout.exercises" :key = "exerciseIndex"> 
-                    <p>Exercise: {{ exercise.name }}</p>
-                    <div v-for="(set, setIndex) in exercise.sets" :key = "setIndex"> 
-                        <p>Set {{ setIndex + 1 }}: <br>Weight: {{ set.weight }}kg, Reps: {{ set.reps }}</p>
-                    </div>
-                </div>
-                <button @click="closeWorkoutDetails">Close</button>
-            </div>
-        </div>
-        <div class="history-view" v-else>
-            <h3>Sign Up Now</h3>
-        </div>
-</template>
+        <p v-else class="no-workouts">No workouts found for the selected workout name.</p>
+      </div>
+    </div>
+  </template>
 
-<script>
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getDoc, getFirestore, doc} from "firebase/firestore";
-
-export default {
+  <script>
+  import { getFirestore, doc, getDoc, updateDoc } from 'firebase/firestore';
+  import { getAuth, onAuthStateChanged } from "firebase/auth";
+  
+  export default {
     name: "History",
-
+  
     data() {
-        return {
-            user: false,
-            selectedDate: null, 
-            workoutsByDate: [],
-            selectedWorkout: null,
-        };
-    }, 
-
-    mounted() {
-        const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                this.user = true; 
-                this.fetchWorkoutHistory(user.uid);
-            }
-        })
+      return {
+        user: null,
+        workouts: [],
+        searchQuery: '', 
+        startDate: null, 
+        endDate: null
+      }
     },
-
-    methods: { 
-        async searchWorkouts() { 
-            if(!this.selectedDate === null) return; 
-            const db = getFirestore(); 
-            const workoutRef = doc(db, 'Workouts', this.user.uid); 
-
-            try { 
-                const doc = await getDoc(workoutRef); 
-                if (doc.exists()) { 
-                    const workouts = doc.data().workoutList;
-                    this.workoutsByDate = workouts.filter(
-                        (workout) =>
-                        workout.timestamp.toDate().toLocaleDateString() ===
-                        this.selectedDate
-                    );
-                }
-            } catch (error) { 
-                console.error(error); 
-            }
-         }, 
-        showWorkoutDetails(workoutNumber) {
-            this.selectedWorkout = this.workoutsByDate.find(
-                (workout) => workout.number === workoutNumber
-            );
-        }, 
-
-        closeWorkoutDetails() { 
-            this.selectedWorkout = null;
-        }, 
+  
+    async mounted() {
+      const auth = getAuth();
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          this.user = user;
+          await this.fetchWorkouts();
+        }
+      });
+    },
+  
+    methods: {
+      async fetchWorkouts() {
+        const db = getFirestore();
+        const docRef = doc(db, 'Workouts', this.user.uid);
+        const docSnap = await getDoc(docRef);
+  
+        if (docSnap.exists()) {
+          this.workouts = docSnap.data().workoutList.sort((a, b) => new Date(b.date) - new Date(a.date));
+        }
+      },
+  
+      async deleteWorkout(index) {
+        this.workouts.splice(index, 1);
+  
+        const db = getFirestore();
+        const workoutDocRef = doc(db, 'Workouts', this.user.uid);
+  
+        await updateDoc(workoutDocRef, { workoutList: this.workouts });
+      }
     }, 
-}; 
-</script>
 
-<style scoped>
-.navbar {
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    height: 120px; 
-    width: 100%;
-    position: fixed;
-    top: 100;
-    left: 0;
-    background: transparent; 
+      computed: {
+        filteredWorkouts() {
+            const query = this.searchQuery.toLowerCase();
+            const startDate = this.startDate ? new Date(this.startDate) : null;
+            const endDate = this.endDate ? new Date(this.endDate) : null;
+
+            return this.workouts.filter(workout => {
+            const workoutDate = new Date(workout.date);
+            const isInDateRange = (!startDate || workoutDate >= startDate) && (!endDate || workoutDate <= endDate);
+            const matchesSearchQuery = workout.workoutName.toLowerCase().includes(query);
+
+            return isInDateRange && matchesSearchQuery;
+            });
+        }
+    }
 }
-
-.history-view {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: 100vh; 
-  background-color: rgb(46, 46, 46);
-  background-size: cover;
-  background-position: center center; 
-  background-repeat: no-repeat; 
-  background-attachment: fixed;
-  text-align: center; 
+  </script>
+  
+ <style scoped>
+body {
+    margin: 0;
+    background-color:rgb(46, 46, 46);; 
+}
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: rgb(46, 46, 46);
+}
+    
+.left-container {
+    width: 30%; 
+    position: fixed;
+    background-color: #2E2E2E;
+    height: 100vh;
+    overflow-y: auto;
 }
 
 .left-text h3 {
@@ -154,28 +153,56 @@ export default {
     font-weight: normal; 
     margin: 1; 
     white-space: nowrap; 
+ }
+    
+.right-container {
+    width: 50%; 
+    margin-left: 40%; 
+    margin-top: 100px;
+    overflow-y: auto;
+    background-color: #2E2E2E;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    }
+    
+.workout-entry {
+    background-color: #3A3A3A;
+    border-radius: 10px;
+    font-size: 1.5vw;
+    padding: 20px;
+    margin: 10px;
 }
-
-.search-bar {
-    position: absolute;  
-    top: 120px; 
-    width: 150px; 
-}
-
-.search-bar input[type="date"] {
-    width: 100%; /* Take up full width of parent */
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    
+button {
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: red;
+    color: white;
 }
 
 .no-workouts {
-    position: absolute; 
-    color: white; 
-    font-size: 1.5vw; 
-    right: 30%; 
-    width: 30vw; 
+        position: absolute; 
+        color: white; 
+        font-size: 1.5vw; 
+        right: 30%; 
+        width: 30vw; 
+}
+.right-container label {
+    margin-left: 1vw;
+  }
+
+.right-container input[type="text"], 
+.right-container input[type="date"]{
+  width: 20vw; 
+  margin: 1vw;
+  padding: 1vw; 
+  font-size: 1vw; 
 }
 
 </style>
-
+    
+    

@@ -1,4 +1,5 @@
 <template>
+
     <div class = "friends-view">
         <h1 class="friends-header"> Friends </h1>
         <ul v-if="friends.length > 0" v-for="friend in friends" class="friends-display">
@@ -7,7 +8,7 @@
         <p v-else class="friends-display">You have no friends currently...</p>
     </div>
 </template>
-  
+
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
@@ -24,12 +25,12 @@ export default {
 
     mounted() {
         const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 this.user = user;
                 this.fetchFriends();
             }
-        })
+        },
     },
 
     methods: {
