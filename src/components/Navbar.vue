@@ -8,6 +8,7 @@
         <router-link class="nav-route" to="/friendRequests" exact>FRIEND REQUESTS</router-link>
         <router-link class="nav-route" to="/feed" exact>FEED</router-link>
         <router-link class="nav-route" to="/friends" exact>FRIENDS</router-link>
+        <router-link class="nav-route" to="/analytics" exact>ANALYTICS</router-link>
         <router-link class="nav-route profile-link" to="/profile" exact>PROFILE</router-link>
         <button id = "btn" @click="signOut()"> LOGOUT </button>
     </nav>
