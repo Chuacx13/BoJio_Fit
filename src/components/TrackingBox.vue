@@ -44,9 +44,10 @@ export default {
     background: white;
     border-radius: 8px;
     margin-bottom: 20px;
+    align-items: center;
 }
 
-#workout-details, #tracking-buttons {
+#tracking-buttons, #workout-details{
     display: flex;
     justify-content: center;
 }
@@ -55,6 +56,7 @@ export default {
     border-radius: 8px;
     margin: 10px;
     padding: 6px;
+    width: 375px;
 }
 
 #weight-input, #reps-input {
