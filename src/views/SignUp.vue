@@ -21,6 +21,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import firebase from '@/uifire.js';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
 export default {
     name: 'SignUp',
@@ -55,8 +56,12 @@ export default {
     methods: {
         async signup() {
             try {
+                const db = getFirestore();
                 if (this.password == this.confirmPassword) {
-                    await createUserWithEmailAndPassword(auth, this.email, this.password);
+                    const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
+                    const user = userCredential.user;
+                    const userDocRef = doc(db, 'Users', user.uid);
+                    await setDoc(userDocRef, { username: this.username, uid: user.uid, friendRequests: [], friends: [] });
                     alert('Successfully Signed Up');
                     this.$router.push('/');
                 } else {
