@@ -7,6 +7,7 @@ import History from '@/views/History.vue'
 import SearchUsers from '@/views/SearchUsers.vue'
 import FriendRequests from '@/views/FriendRequests.vue'
 import Feed from '@/views/Feed.vue'
+import Analytics from '@/views/Analytics.vue'
 import Friends from '@/views/Friends.vue'
 import Profile from '@/views/Profile.vue'
 import EditProfile from '@/views/EditProfile.vue'
@@ -61,6 +62,11 @@ const routes = [
         path: '/profile',
         name: 'Profile',
         component: Profile
+    },
+    {
+        path: '/analytics',
+        name: 'Analytics',
+        component: Analytics
     },
     {
         path: '/editProfile',
