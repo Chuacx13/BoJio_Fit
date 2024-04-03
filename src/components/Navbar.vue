@@ -78,9 +78,8 @@ export default {
     color: white;
     padding: 10px 40px 10px 40px; 
     text-decoration: none;
-    font-family: monospace;
     transition: background-color 0.3s, color 0.3s;
-    font-size: 18px; 
+    font-size: 15px; 
     font-weight: bold; 
 }
 
