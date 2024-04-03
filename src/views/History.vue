@@ -116,7 +116,7 @@ export default {
   align-items: center;
   width: 100%;
   min-height: 100vh; 
-  background-image: url('@/assets/home_background.png');
+  background-color: rgb(46, 46, 46);
   background-size: cover;
   background-position: center center; 
   background-repeat: no-repeat; 
