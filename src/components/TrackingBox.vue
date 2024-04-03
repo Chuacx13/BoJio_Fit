@@ -59,7 +59,7 @@ export default {
 
 #weight-input, #reps-input {
     border-radius: 8px;
-    width: 100px;
+    min-width: 50px;
     margin: 10px;
     padding: 6px;
 }
@@ -71,7 +71,7 @@ export default {
     padding: 6px;
     margin: 10px;
     cursor: pointer;
-    width: 100px;
+    min-width: 100px;
 }
 
 #add-button {
