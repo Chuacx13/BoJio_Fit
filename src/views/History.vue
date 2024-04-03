@@ -10,8 +10,9 @@
       </div>
   
       <div class="right-container">
-        <div v-if="workouts && workouts.length > 0">
-          <div class="workout-entry" v-for="(workout, index) in workouts" :key="index">
+        <input type ="text" v-model="searchQuery" placeholder = "Search by workout name">
+        <div v-if="filteredWorkouts.length > 0">
+          <div class="workout-entry" v-for="(workout, index) in filteredWorkouts" :key="index">
             <h2>{{ workout.date }} - {{ workout.workoutName }}</h2>
             <p>Duration: {{ workout.duration }} minutes</p>
             <ul>
@@ -27,7 +28,7 @@
             <button @click="deleteWorkout(index)">Delete Workout</button>
           </div>
         </div>
-        <p v-else class="no-workouts">No workouts found for the selected date.</p>
+        <p v-else class="no-workouts">No workouts found for the selected workout name.</p>
       </div>
     </div>
   </template>
@@ -42,7 +43,8 @@
     data() {
       return {
         user: null,
-        workouts: []
+        workouts: [],
+        searchQuery: ''
       }
     },
   
@@ -74,9 +76,20 @@
         const workoutDocRef = doc(db, 'Workouts', this.user.uid);
   
         await updateDoc(workoutDocRef, { workoutList: this.workouts });
-      }
+      }, 
+
+      filterWorkouts() {
+        const query = this.searchQuery.toLowerCase();
+        this.filteredWorkouts = this.workouts.filter(workout => workout.workoutName.toLowerCase().includes(query));
+        }
+    },
+
+    computed: {
+        filteredWorkouts() {
+        return this.workouts.filter(workout => workout.workoutName.toLowerCase().includes(this.searchQuery.toLowerCase()));
+        }
     }
-  }
+}
   </script>
   
  <style scoped>
@@ -167,6 +180,12 @@
     right: 30%; 
     width: 30vw; 
 }
+.right-container input[type="text"] {
+  width: 50%; 
+  padding: 1.5vw; 
+  font-size: 1.3vw; 
+}
+
  </style>
  
   
