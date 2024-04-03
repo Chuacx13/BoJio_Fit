@@ -94,6 +94,7 @@ export default {
     transition: background-color 0.3s, color 0.3s;
     font-size: 15px; 
     font-weight: bold; 
+    white-space: nowrap;
 }
 
 .nav-route:hover, #btn:hover {

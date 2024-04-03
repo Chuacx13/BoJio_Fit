@@ -10,14 +10,19 @@
       </div>
   
       <div class="right-container">
+        <label for="workoutName">Workout Name:</label>
         <input type ="text" v-model="searchQuery" placeholder = "Search by workout name">
+        <label for="startDate">Start Date:</label>
+        <input type="date" v-model="startDate" placeholder="Start Date">
+        <label for="endDate">End Date:</label>
+        <input type="date" v-model="endDate" placeholder="End Date">
         <div v-if="filteredWorkouts.length > 0">
           <div class="workout-entry" v-for="(workout, index) in filteredWorkouts" :key="index">
-            <h2>{{ workout.date }} - {{ workout.workoutName }}</h2>
+            <h2>{{ workout.date }}: {{ workout.workoutName }}</h2>
             <p>Duration: {{ workout.duration }} minutes</p>
             <ul>
               <li v-for="(exercise, eIndex) in workout.exercises" :key="eIndex">
-                {{ exercise.name }} - Sets:
+                {{ exercise.name }}:
                 <ul>
                   <li v-for="(set, sIndex) in exercise.sets" :key="sIndex">
                     Set {{ sIndex + 1 }}: {{ set.weight }} Kg x {{ set.reps }} reps
@@ -44,7 +49,9 @@
       return {
         user: null,
         workouts: [],
-        searchQuery: ''
+        searchQuery: '', 
+        startDate: null, 
+        endDate: null
       }
     },
   
@@ -76,41 +83,47 @@
         const workoutDocRef = doc(db, 'Workouts', this.user.uid);
   
         await updateDoc(workoutDocRef, { workoutList: this.workouts });
-      }, 
+      }
+    }, 
 
-      filterWorkouts() {
-        const query = this.searchQuery.toLowerCase();
-        this.filteredWorkouts = this.workouts.filter(workout => workout.workoutName.toLowerCase().includes(query));
-        }
-    },
-
-    computed: {
+      computed: {
         filteredWorkouts() {
-        return this.workouts.filter(workout => workout.workoutName.toLowerCase().includes(this.searchQuery.toLowerCase()));
+            const query = this.searchQuery.toLowerCase();
+            const startDate = this.startDate ? new Date(this.startDate) : null;
+            const endDate = this.endDate ? new Date(this.endDate) : null;
+
+            return this.workouts.filter(workout => {
+            const workoutDate = new Date(workout.date);
+            const isInDateRange = (!startDate || workoutDate >= startDate) && (!endDate || workoutDate <= endDate);
+            const matchesSearchQuery = workout.workoutName.toLowerCase().includes(query);
+
+            return isInDateRange && matchesSearchQuery;
+            });
         }
     }
 }
   </script>
   
  <style scoped>
- body {
-  margin: 0;
-  background-color: #2E2E2E; 
+body {
+    margin: 0;
+    background-color:rgb(46, 46, 46);; 
 }
- .container {
-   display: flex;
-   min-height: 100vh;
- }
- 
- .left-container {
-   width: 30%; 
-   position: fixed;
-   background-color: #2E2E2E;
-   height: 100vh;
-   overflow-y: auto;
- }
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: rgb(46, 46, 46);
+}
+    
+.left-container {
+    width: 30%; 
+    position: fixed;
+    background-color: #2E2E2E;
+    height: 100vh;
+    overflow-y: auto;
+}
 
- .left-text h3 {
+.left-text h3 {
     position: absolute;
     left: 5%;
     top: 40%;  
@@ -140,52 +153,56 @@
     font-weight: normal; 
     margin: 1; 
     white-space: nowrap; 
+ }
+    
+.right-container {
+    width: 50%; 
+    margin-left: 40%; 
+    margin-top: 100px;
+    overflow-y: auto;
+    background-color: #2E2E2E;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    }
+    
+.workout-entry {
+    background-color: #3A3A3A;
+    border-radius: 10px;
+    font-size: 1.5vw;
+    padding: 20px;
+    margin: 10px;
 }
- 
- .right-container {
-   width: 70%; 
-   margin-left: 30%; 
-   margin-top: 100px;
-   overflow-y: auto;
-   background-color: #2E2E2E;
-   color: white;
- }
- 
- .history-header {
-   color: orange;
-   margin-top: 30px;
- }
- 
- .workout-entry {
-   background-color: #3A3A3A;
-   border-radius: 10px;
-   padding: 20px;
-   margin: 10px;
- }
- 
- button {
-   border-radius: 10px;
-   border: none;
-   padding: 10px;
-   margin-top: 10px;
-   cursor: pointer;
-   background-color: red;
-   color: white;
- }
-
- .no-workouts {
-    position: absolute; 
-    color: white; 
-    font-size: 1.5vw; 
-    right: 30%; 
-    width: 30vw; 
-}
-.right-container input[type="text"] {
-  width: 50%; 
-  padding: 1.5vw; 
-  font-size: 1.3vw; 
+    
+button {
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: red;
+    color: white;
 }
 
- </style>
- 
-  
+.no-workouts {
+        position: absolute; 
+        color: white; 
+        font-size: 1.5vw; 
+        right: 30%; 
+        width: 30vw; 
+}
+.right-container label {
+    margin-left: 1vw;
+  }
+
+.right-container input[type="text"], 
+.right-container input[type="date"]{
+  width: 20vw; 
+  margin: 1vw;
+  padding: 1vw; 
+  font-size: 1vw; 
+}
+
+</style>
+    
+    
