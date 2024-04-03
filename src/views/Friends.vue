@@ -30,7 +30,7 @@ export default {
                 this.user = user;
                 this.fetchFriends();
             }
-        },
+        })
     },
 
     methods: {
