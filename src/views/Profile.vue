@@ -2,7 +2,7 @@
     <div class = "profile-view">
         <div class = "user-info">
             <div class="user-item">
-                <strong>{{ userInfo.Name }}</strong>
+                <strong>{{ userInfo.username }}</strong>
             </div>
             <div class="user-item">
                 <strong>Age: {{ userInfo.Age }}</strong>
@@ -19,7 +19,7 @@
             <div class="user-item">
                 <strong>Tele: {{ userInfo.Telegram }}</strong> 
             </div>
-            <router-link class="nav-route" to="/editProfile" exact>Edit Profile</router-link>
+            <button class="edit-profile-button" @click="redirectToEditProfile">Edit Profile</button>
         </div>
     </div>    
     <div class="numberOfWorkouts">
@@ -63,13 +63,16 @@ export default {
     methods: {
         async fetchUserInfo() {
             const db = getFirestore()
-            const UserInfoRef = doc(db, "User_Info", this.user.uid);
+            const UserInfoRef = doc(db, "Users", this.user.uid);
             const docSnap = await getDoc(UserInfoRef);
             if (docSnap.exists()) {
                 this.userInfo = docSnap.data();
             } else {
                 console.error("User information not found");
             }
+        },
+        redirectToEditProfile() {
+            this.$router.push({name : 'EditProfile'})
         }
     }
 }
@@ -79,10 +82,7 @@ export default {
 .user-info {
     display:flex;
     flex-direction: row;
-    margin-left: 10vw;
     margin-top: 120px;
-    width: 80%;
-    align-items: flex-start;
 }
 
 .user-item {
@@ -105,15 +105,11 @@ export default {
   justify-content: center;
   width: 100%;
   min-height: 100vh; 
-  background-image: url('@/assets/home_background.png');
-  background-size: cover;
-  background-position: center center; 
-  background-repeat: no-repeat; 
-  background-attachment: fixed;
-  text-align: center; 
+  text-align: center;
+  background-color: rgb(46, 46, 46); 
 }
 
-.nav-route {
+button {
     height: 5vh;
     background-color: orange;
     border-radius: 10px;
