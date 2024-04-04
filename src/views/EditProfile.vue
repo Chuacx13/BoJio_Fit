@@ -75,30 +75,20 @@ export default {
         async submitForm() {
             const db = getFirestore();
             // Get document reference from "Workouts" collection with unique "uid" document 
-            const UserInfoDocRef = doc(db, 'User_Info', this.user.uid);
+            const UserDocRef = doc(db, 'Users', this.user.uid);
 
             try {
-                const docSnap = await getDoc(UserInfoDocRef);
+                const docSnap = await getDoc(UserDocRef);
 
-                if (docSnap.exists()) {
-                    await setDoc(UserInfoDocRef, {
-                         Name: this.name,
-                         Age: this.age,
-                         Gender: this.gender,
-                         Height: this.height,
-                         Weight: this.weight,
-                         Telegram: this.telegram
-                    })
-                } else {
-                    await setDoc(UserInfoDocRef, {
-                         Name: this.name,
-                         Age: this.age,
-                         Gender: this.gender,
-                         Height: this.height,
-                         Weight: this.weight,
-                         Telegram: this.telegram
-                    });
-                }
+                await setDoc(UserDocRef, {
+                    username: this.name,
+                    Age: this.age,
+                    Gender: this.gender,
+                    Height: this.height,
+                    Weight: this.weight,
+                    Telegram: this.telegram
+                }, {merge: true});
+
                 this.$router.push({ name: 'Home'});
             } catch (error) {
                 console.error(error);
