@@ -1,9 +1,9 @@
 <template>
-
     <div class = "friends-view">
         <h1 class="friends-header"> Friends </h1>
         <ul v-if="friends.length > 0" v-for="friend in friends" class="friends-display">
-            {{ friend.username }} is your friend.
+            <span><strong>{{ friend.username }}</strong> is your friend.</span>
+            <button class="view-profile-button">View Profile</button>
         </ul>
         <p v-else class="friends-display">You have no friends currently...</p>
     </div>
@@ -65,25 +65,52 @@ export default {
 }
 
 .friends-header {
-    position: absolute; 
-    top: 0%; 
-    left:44%; 
+    position: absolute;
+    top: 10%;
     color: orange;
     align-items: center;
-    margin-top: 120px;
-    margin-bottom: 40px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 30px;
 }
 
 .friends-display {
-    position: absolute; 
-    font-size: 20px;
-    top: 15%; 
-    right: 25%; 
+    position: absolute;
+    top: 20%;
     display: flex;
+    width: 40%;
     align-items: center;
-    width: 50%;
-    justify-content: center;
-    margin: 40px;
+    margin-top: 20px;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 10px;
+    color: white;
+    font-size: 25px;
+}
+
+.friends-display span {
+    font-size: 25px;
+    margin: 10px;
+}
+
+.friends-display span strong {
+    font-weight: bold;
     color: orange;
+}
+
+.view-profile-button {
+    padding: 15px 30px;
+    margin-left: 26px;
+    margin-right: 26px;
+    color: white;
+    background-color: blue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+.view-profile-button:hover {
+    background-color: rgb(42, 42, 197); /* Darker color on hover */
 }
 </style>
