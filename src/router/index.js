@@ -72,6 +72,11 @@ const routes = [
         path: '/editProfile',
         name: 'EditProfile',
         component: EditProfile
+    }, 
+    {
+        path: '/:catchAll(.*)',
+        name: 'NotFound',
+        component: NotFound,
     }
 ]
 const router = createRouter({
