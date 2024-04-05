@@ -11,6 +11,7 @@ import Analytics from '@/views/Analytics.vue'
 import Friends from '@/views/Friends.vue'
 import Profile from '@/views/Profile.vue'
 import EditProfile from '@/views/EditProfile.vue'
+import NotFound from '@/views/NotFound.vue'
 
 const routes = [
     {
