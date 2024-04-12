@@ -125,9 +125,9 @@ body {
 
 .left-text h3 {
     position: absolute;
-    left: 5%;
+    left: 10%;
     top: 40%;  
-    font-size: 5vw;
+    font-size: 4vw;
     margin: 0; 
     text-align: left;
     font-weight: bold;
@@ -144,12 +144,12 @@ body {
 
 .encouragement-text { 
     position: absolute;
-    left: 5%;
+    left: 10%;
     top: 45%;
     transform: translateY(100%);
     text-align: left; 
     color: white;
-    font-size: 1.5vw; 
+    font-size: 1.1vw; 
     font-weight: normal; 
     margin: 1; 
     white-space: nowrap; 
@@ -168,28 +168,29 @@ body {
     
 .workout-entry {
     background-color: #3A3A3A;
-    border-radius: 10px;
-    font-size: 1.5vw;
-    padding: 20px;
-    margin: 10px;
+    border-radius: 1vw;
+    font-size: 1.2vw;
+    padding: 2vw;
+    margin: 1vw;
 }
     
 button {
-    border-radius: 10px;
+    border-radius: 1vw;
     border: none;
-    padding: 10px;
-    margin-top: 10px;
+    padding: 0.7vw;
+    margin-top: 1vw;
     cursor: pointer;
     background-color: red;
     color: white;
 }
 
 .no-workouts {
-        position: absolute; 
-        color: white; 
-        font-size: 1.5vw; 
-        right: 30%; 
-        width: 30vw; 
+    position: absolute; 
+    color: white; 
+    font-size: 1.2vw; 
+    margin-left: 1vw; 
+    top: 40%;  
+    width: 30vw; 
 }
 .right-container label {
     margin-left: 1vw;
@@ -197,10 +198,11 @@ button {
 
 .right-container input[type="text"], 
 .right-container input[type="date"]{
-  width: 20vw; 
+  width: 13vw; 
+  height: 0.8vw;
   margin: 1vw;
-  padding: 1vw; 
-  font-size: 1vw; 
+  padding: 0.8vw; 
+  font-size: 0.8vw; 
 }
 
 </style>
