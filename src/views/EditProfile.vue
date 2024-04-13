@@ -43,7 +43,7 @@ import Navbar from '@/components/Navbar.vue'
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 export default {
-    name: "EditProfile"
+    name: "EditProfile",
 
     data() {
         return {
@@ -101,11 +101,6 @@ export default {
     height: 100vh;
     width: 100%;
     min-height: 100vh; 
-    background-image: url('@/assets/home_background.png');
-    background-size: cover;
-    background-position: center center; 
-    background-repeat: no-repeat; 
-    background-attachment: fixed;
     text-align: center;
 }
 
