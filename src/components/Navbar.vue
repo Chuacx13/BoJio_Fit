@@ -13,9 +13,9 @@
         <button id = "btn" @click="signOut()"> LOGOUT </button>
     </nav>
     <nav class="navbar" :class="{'navbar-transparent': isTransparent}" v-else>
-        <router-link class="nav-route" to="/" exact>Home</router-link>
-        <router-link class="nav-route" to="/login">Login</router-link>
-        <router-link class="nav-route" to="/signup">Sign Up</router-link>
+        <router-link class="nav-route" to="/" exact>HOME</router-link>
+        <router-link class="nav-route" to="/login">LOGIN</router-link>
+        <router-link class="nav-route" to="/signup">SIGN UP</router-link>
     </nav>
 </template>
 
