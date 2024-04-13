@@ -12,6 +12,7 @@ import Friends from '@/views/Friends.vue'
 import Profile from '@/views/Profile.vue'
 import EditProfile from '@/views/EditProfile.vue'
 import NotFound from '@/views/NotFound.vue'
+import SetUpProfile from '@/views/SetUpProfile.vue'
 
 const routes = [
     {
@@ -70,16 +71,22 @@ const routes = [
         component: Analytics
     },
     {
-        path: '/editProfile',
+        path: '/editprofile',
         name: 'EditProfile',
         component: EditProfile
     }, 
     {
         path: '/:catchAll(.*)',
         name: 'NotFound',
-        component: NotFound,
+        component: NotFound
+    },
+    {
+        path: '/setupprofile',
+        name: 'SetUpProfile',
+        component: SetUpProfile
     }
 ]
+
 const router = createRouter({
     history: createWebHistory(),
     routes
