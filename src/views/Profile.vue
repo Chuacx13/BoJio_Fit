@@ -81,14 +81,18 @@ export default {
 <style scoped>
 .user-info {
     display:flex;
-    flex-direction: row;
+    flex-direction: wrap;
+    justify-content: space-between;
     margin-top: 120px;
+    height: 5vh;
+    align-items: center;
 }
 
 .user-item {
     display: flex;
     margin-right: 5vw;
-    color: white;
+    color: whitesmoke;
+    align-items: center;
 }
 
 .user-item strong {
@@ -109,13 +113,12 @@ export default {
   background-color: rgb(46, 46, 46); 
 }
 
-button {
-    height: 5vh;
+.edit-profile-button {
     background-color: orange;
     border-radius: 10px;
     border: none;
-    padding: 15px 10px 0px 10px;
+    padding: 5px 10px;
     cursor: pointer;
-    display: inline-block;
+    margin-left: auto;
 }
 </style>
