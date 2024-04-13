@@ -1,5 +1,4 @@
 <template>
-    <Navbar/>
     <div class = "editProfile-view">
         <form @submit.prevent="submitForm">
             <div class="form">    
@@ -44,11 +43,7 @@ import Navbar from '@/components/Navbar.vue'
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 export default {
-    name: "EditProfile",
-
-    components: {
-        Navbar
-    }, 
+    name: "EditProfile"
 
     data() {
         return {
@@ -143,7 +138,7 @@ input, select {
 button {
     width: 100%;
     padding: 10px 0;
-    background-color: #007bff;
+    background-color: orange;
     color: white;
     border: none;
     border-radius: 4px;
