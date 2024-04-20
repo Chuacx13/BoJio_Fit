@@ -124,7 +124,13 @@
   }
   
   select {
-    margin: 20px 0;
+  margin: 20px 0;
+  padding: 8px 16px; /* Add padding */
+  border-radius: 8px; /* Rounded corners */
+  background: white; /* Optional: changes background color */
+  border: 1px solid #ccc; /* Optional: adds a light border */
+  outline: none; /* Optional: removes focus outline */
+  cursor: pointer; /* Optional: changes cursor on hover */
   }
-  </style>
+</style>
   
