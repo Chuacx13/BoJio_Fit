@@ -55,6 +55,10 @@
                     <strong class = "quantity-indicator"> Current Number of Badges : {{ numberOfBadges }} </strong>
                 </div>
             </div>
+
+            <div class = "view-analytics">
+                <button class ="view-analytics-button" @click="redirectToAnalytics"> View Analytics</button>
+            </div>
         </div>    
     </div>    
 </template>
@@ -62,9 +66,6 @@
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
-// import firebase from 'firebase/app';
-// import 'firebase/auth';
-// import 'firebase/firestore';
 
 export default {
     name: "Profile",
@@ -122,6 +123,9 @@ export default {
         redirectToEditProfile() {
             this.$router.push({name : 'EditProfile'})
         },
+        redirectToAnalytics() {
+            this.$router.push({name : 'Analytics'})
+        },
         async fetchWorkoutInfo() {
              const db = getFirestore()
              const workoutInfoRef = doc(db, "Workouts", this.user.uid);
@@ -148,8 +152,8 @@ export default {
     display:flex;
     flex-direction: wrap;
     justify-content: space-between;
-    margin-top: 120px;
-    height: 5vh;
+    margin-top: 5vh;
+    height: 1vh;
     align-items: center;
 }
 
@@ -161,12 +165,12 @@ export default {
 }
 
 .user-item strong {
-    min-width: 100px; /* Adjust the width as needed */
+    min-width: 100px; 
 }
 
 .user-item span {
-    flex: 1; /* Expand to fill remaining space */
-    text-align: right; /* Align text to the right */
+    flex: 1; 
+    text-align: right; 
 }
 
 .profile-view {
@@ -188,8 +192,9 @@ export default {
 }
 
 .profile-picture {
-    width: 80px; /* Adjust width as needed */
-    height: auto; /* Maintain aspect ratio */
+    width: 80px; 
+    height: auto; 
+    margin-right: 5vw;
 }
 
 .badges-info {
@@ -197,7 +202,7 @@ export default {
     width: 80vw;
     height: 60vh;
     padding: 20px;
-    margin-top: 10vh;
+    margin-top: 5vh;
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -205,17 +210,17 @@ export default {
 
 .parent-container {
     display: flex;
-    flex-direction: column; /* Stack elements vertically */
-    align-items: center; /* Center children horizontally */
+    flex-direction: column; 
+    align-items: center; 
     width: 100vw;
 }
 
 .number-of-workouts {
-    width: 30%; /* Adjust width as needed */
-    height: 80%; /* Adjust height as needed */
+    width: 30%; 
+    height: 100%; 
     background-color: white;
     border-radius: 10px;
-    margin: 0 50px;
+    margin: 0 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -223,22 +228,22 @@ export default {
 }
 
 .number-of-workout-hours {
-    width: 30%; /* Adjust width as needed */
-    height: 80%; /* Adjust height as needed */
+    width: 30%;
+    height: 100%; 
     background-color: white;
     border-radius: 10px;
-    margin: 0 50px;
+    margin: 0 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 .number-of-badges {
-    width: 30%; /* Adjust width as needed */
-    height: 80%; /* Adjust height as needed */
+    width: 30%; 
+    height: 100%; 
     background-color: white;
     border-radius: 10px;
-    margin: 0 50px; 
+    margin: 0 30px; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -270,15 +275,29 @@ export default {
 
 .badge-text {
     position: absolute;
-    bottom: 52.5%; /* Adjust as needed */
-    left: 50%; /* Adjust as needed */
+    bottom: 52.5%; 
+    left: 50%; 
     transform: translateX(-50%);
-    color: white; /* Set the color of the text */
-    font-size: 2vw; /* Set the font size */
+    color: white; 
+    font-size: 2vw;
 }
 
 .badge-attained {
     font-size: 1vw;
     color: orange;
 }
+
+.view-analytics {
+    margin-top: 2vh;
+}
+
+.view-analytics-button {
+    background-color: orange;
+    border-radius: 10px;
+    border: none;
+    padding: 1vh 5vw;
+    cursor: pointer;
+    margin-left: auto;
+}
+
 </style>
