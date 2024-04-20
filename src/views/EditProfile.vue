@@ -31,6 +31,10 @@
                     <label for="tele">Telegram Handle:</label>
                     <input type="text" id="telegram" v-model="telegram" required>
                 </div>
+                <div class="form-group">
+                    <label for="profilePicture">Profile Picture:</label>
+                    <input type="file" id="profilePicture" accept="image/*" @change="handleProfilePicChange">
+                </div>
                 <button type="submit">Save</button>
             </div>    
         </form>
@@ -39,7 +43,6 @@
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Navbar from '@/components/Navbar.vue'
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 export default {
@@ -53,7 +56,8 @@ export default {
              gender: '',
              height: '',
              weight: '',
-             telegram: ''
+             telegram: '',
+             profilePicture: null
         }
     }, 
 
@@ -68,6 +72,7 @@ export default {
     
     methods: {
         async submitForm() {
+            console.log("submitForm method called");
             const db = getFirestore();
             // Get document reference from "Workouts" collection with unique "uid" document 
             const UserDocRef = doc(db, 'Users', this.user.uid);
@@ -81,13 +86,18 @@ export default {
                     Gender: this.gender,
                     Height: this.height,
                     Weight: this.weight,
-                    Telegram: this.telegram
+                    Telegram: this.telegram,
+                    ProfilePicture: this.profilePicture
                 }, {merge: true});
 
                 this.$router.push({ name: 'Home'});
             } catch (error) {
                 console.error(error);
             }
+        },
+        handleProfilePicChange(event) {
+            const file = event.target.files[0];
+            this.profilePicture = file;
         }
     }
 }
