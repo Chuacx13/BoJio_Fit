@@ -158,7 +158,7 @@ body {
 .right-container {
     width: 50%; 
     margin-left: 40%; 
-    margin-top: 100px;
+    margin-top: 20px;
     overflow-y: auto;
     background-color: #2E2E2E;
     color: white;

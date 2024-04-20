@@ -66,15 +66,14 @@ export default {
     align-items: center;
     width: 100%;
     height: 100px;
-    position: fixed; 
-    z-index: 1000; 
+    z-index: 1000;
     background-color: rgb(46, 46, 46);
-    right: 17px;
     box-sizing: border-box;
 }
 
 .navbar-transparent{
     background-color: transparent;
+    position: fixed;
 }
 
 .nav-route.router-link-active {
