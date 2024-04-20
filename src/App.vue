@@ -1,7 +1,11 @@
 <template> 
-    <Navbar v-if="!isLoading"/>
-    <Loading v-if="isLoading"/>
-    <router-view/>
+    <div id="app">
+        <Navbar v-if="!isLoading"/>
+        <Loading v-if="isLoading"/>
+        <div class="content-wrapper" v-if="!isLoading">
+            <router-view/>
+        </div>
+    </div>
 </template> 
 
 <script> 
@@ -30,7 +34,7 @@ export default {
             }
             this.isLoading = false;
         })
-    },
+    }
 }
 </script>
 
@@ -38,14 +42,18 @@ export default {
 #app {
     padding: 0px;
     margin: 0px;
+    height: 100vh;
 }
 
 html, body {
+  height: 100%; 
   margin: 0;
   padding: 0;
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-  overflow-x: hidden;
+  overflow: hidden; 
+}
+
+.content-wrapper {
+  height: 100%; 
+  overflow-y: auto; 
 }
 </style>

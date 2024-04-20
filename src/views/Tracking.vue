@@ -123,7 +123,6 @@ export default {
 
 .tracking-header {
     color: orange;
-    margin-top: 120px;
     margin-bottom: 20px;
 }
 
@@ -154,6 +153,7 @@ export default {
 
 #save-workout-button {
     background-color: rgb(53, 170, 53);
+    margin-bottom: 30px;
 }
 
 #duration-input, #workout-name-input, #date-input {
