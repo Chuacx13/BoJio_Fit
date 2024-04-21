@@ -44,6 +44,7 @@
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export default {
     name: "EditProfile",
@@ -87,7 +88,7 @@ export default {
                     Height: this.height,
                     Weight: this.weight,
                     Telegram: this.telegram,
-                    ProfilePicture: this.profilePicture
+                    profilePicture: this.profilePicture
                 }, {merge: true});
 
                 this.$router.push({ name: 'Home'});
@@ -95,9 +96,19 @@ export default {
                 console.error(error);
             }
         },
-        handleProfilePicChange(event) {
+        async handleProfilePicChange(event) {
             const file = event.target.files[0];
-            this.profilePicture = file;
+            const storage = getStorage();
+            const storageRef = ref(storage, `profile_pictures/${this.user.uid}/${file.name}`);
+
+            try {
+                const snapshot = await uploadBytesResumable(storageRef, file);
+                const dlURL = await getDownloadURL(snapshot.ref);
+                this.profilePicture = dlURL;
+                console.log("Download URL:", dlURL);
+            } catch (error) {
+                console.error("Error uploading image:", error);
+            }   
         }
     }
 }

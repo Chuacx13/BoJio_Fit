@@ -2,7 +2,7 @@
     <div class = "profile-view">
         <div class = "parent-container">
             <div class = "user-info">
-                <img class="profile-picture" src='@/assets/default_profile_pic.jpeg' alt="Profile Picture">
+                <img class="profile-picture" :src="userInfo.profilePicture || defaultProfilePic" alt="Profile Picture">
                 <div class="user-item">
                     <strong>{{ userInfo.username }}</strong>
                 </div>
@@ -75,7 +75,8 @@ export default {
             user: false,
             userInfo: [],
             workoutInfo: [],
-            displayNumber: 0
+            displayNumber: 0,
+            defaultProfilePic: null
         }
     }, 
 
@@ -86,6 +87,7 @@ export default {
                  this.user = user
                  await this.fetchUserInfo();
                  await this.fetchWorkoutInfo();
+                 this.loadDefaultProfilePic();
             }
         })
     },
@@ -142,6 +144,14 @@ export default {
                 total += workout.duration / 60;
             });
             return total;
+        },
+        async loadDefaultProfilePic() {
+            try {
+                const { default: defaultProfilePic } = await import('@/assets/default_profile_pic.jpeg');
+                this.defaultProfilePic = defaultProfilePic;
+            } catch(error) {
+                console.error("Error loading default profile picture", error);
+            }
         }
     }
 }
