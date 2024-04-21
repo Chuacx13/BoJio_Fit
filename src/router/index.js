@@ -13,6 +13,7 @@ import Profile from '@/views/Profile.vue'
 import EditProfile from '@/views/EditProfile.vue'
 import NotFound from '@/views/NotFound.vue'
 import SetUpProfile from '@/views/SetUpProfile.vue'
+import FriendProfile from '@/views/FriendProfile.vue'
 
 const routes = [
     {
@@ -84,6 +85,12 @@ const routes = [
         path: '/setupprofile',
         name: 'SetUpProfile',
         component: SetUpProfile
+    },
+    {
+        path: '/friendprofile/:friendId',
+        name: 'FriendProfile',
+        component: FriendProfile,
+        props: true
     }
 ]
 

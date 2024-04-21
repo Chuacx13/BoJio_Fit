@@ -13,7 +13,7 @@
             <ul v-if="friends.length > 0" class="friends-display">
                 <li v-for="friend in friends">
                     <span><strong>{{ friend.username }}</strong> is your friend.</span>
-                <button class="view-profile-button">View Profile</button>
+                <button @click="redirectToFriendProfile(friend.userID)" class="view-profile-button">View Profile</button>
                 </li>
             </ul>
             <p v-else class="friends-display">You have no friends currently...</p>
@@ -61,6 +61,9 @@ export default {
             } catch(error) {
                 console.log(error);
             }
+        },
+        redirectToFriendProfile(friendId) {
+            this.$router.push({ name: 'FriendProfile', params: { friendId } });
         }
     }
 }

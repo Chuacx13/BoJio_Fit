@@ -82,6 +82,17 @@ export default {
                     }
                 ];
                 await setDoc(userDocRef, { friends: updatedFriends }, { merge: true });
+                const otherUserDocRef = doc(db, 'Users', request.userID);
+                const otherUserDocSnapshot = await getDoc(otherUserDocRef);
+                const otherUserData = otherUserDocSnapshot.data();
+                const updatedOtherFriends = [
+                    ...(otherUserData.friends || []), // Ensure existing friends are preserved
+                    {
+                        userID: this.user.uid,
+                        username: userData.username
+                    }
+                ];
+                await setDoc(otherUserDocRef, { friends: updatedOtherFriends }, { merge: true });
                 alert('friend request accepted');
                 window.location.reload();
             } catch (error) {
