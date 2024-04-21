@@ -105,29 +105,26 @@
   </script>
   
  <style scoped>
-body {
-    margin: 0;
-    background-color:rgb(46, 46, 46);; 
-}
+ 
 .container {
     display: flex;
-    min-height: 100vh;
+    min-height: 220vh;
     background-color: rgb(46, 46, 46);
 }
     
 .left-container {
-    width: 30%; 
+    width: 40%; 
     position: absolute;
     display: flex; 
     background-color: #2E2E2E;
-    height: 80vh;
+    height: 100%;
     overflow-y: auto;
 }
 
 .left-text h3 {
     position: absolute;
     left: 10%;
-    top: 40%;  
+    top: 35%;  
     font-size: 4vw;
     margin: 0; 
     text-align: left;
@@ -146,7 +143,7 @@ body {
 .encouragement-text { 
     position: absolute;
     left: 10%;
-    top: 45%;
+    top: 40%;
     transform: translateY(100%);
     text-align: left; 
     color: white;
@@ -158,29 +155,44 @@ body {
     
 .right-container {
     width: 50%; 
-    margin-left: 40%; 
-    margin-top: 20px;
+    height: 100%; 
+    left: 40%; 
     overflow-y: auto;
     background-color: #2E2E2E;
     color: white;
     display: flex;
+    position: absolute; 
     flex-direction: column;
     }
-    
+
+.right-container label {
+  margin-left: 1vw;
+  font-size: 1vw; 
+}
+
+.right-container input[type="text"], 
+.right-container input[type="date"]{
+  width: 13vw; 
+  height: 0.8vh;
+  margin: 1vw;
+  padding: 0.8vw; 
+  font-size: 0.8vw; 
+}
 .workout-entry {
     background-color: #3A3A3A;
-    border-radius: 1vw;
-    font-size: 1.2vw;
-    padding: 2vw;
+    border-radius: 2vw;
+    font-size: 1vw;
+    padding: 1vw;
     margin: 1vw;
 }
     
 button {
     display: flex; 
+    font-size: 1vw;
     border-radius: 1vw;
     border: none;
     padding: 0.7vw;
-    margin-top: 1vw;
+    margin-top: 1vh;
     cursor: pointer;
     background-color: red;
     color: white;
@@ -188,24 +200,11 @@ button {
 
 .no-workouts {
     position: absolute; 
+    display: flex; 
     color: white; 
-    font-size: 1.2vw; 
-    margin-left: 1vw; 
-    top: 40%;  
-    width: 30vw; 
-}
-.right-container label {
-    margin-left: 1vw;
     font-size: 1vw; 
-  }
-
-.right-container input[type="text"], 
-.right-container input[type="date"]{
-  width: 13vw; 
-  height: 0.8vw;
-  margin: 1vw;
-  padding: 0.8vw; 
-  font-size: 0.8vw; 
+    margin-left: 1vw; 
+    margin-top: 35%; 
 }
 
 </style>

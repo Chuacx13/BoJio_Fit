@@ -5,6 +5,7 @@
     <div class="search-users-result">
         <ul v-show="searchResults.length > 0">
             <li v-for="otherUser in searchResults">
+                <img v-if="otherUser.profilePicture || defaultProfilePic" :src="otherUser.profilePicture" class="profile-picture">
                 <span>{{ otherUser.username }}</span>
                 <button @click="addFriend(otherUser)">Add Friend</button>
             </li>
@@ -15,6 +16,7 @@
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, getDocs, query, collection, where, getDoc, doc, setDoc } from 'firebase/firestore';
+import defaultProfilePic from '@/assets/default_profile_pic.jpeg';
 
 export default {
     mounted() {
@@ -30,6 +32,7 @@ export default {
         return {
             searchQuery: '',
             searchResults: [],
+            defaultProfilePic: defaultProfilePic
         };
     },
 
@@ -153,7 +156,7 @@ export default {
 }
 
 .search-users-result button {
-    font-size: 1vw; 
+    font-size: 0.7vw; 
     transform: translateY(-15%);
     position: absolute; 
     padding: 0.5vw 1vh;
@@ -177,5 +180,12 @@ export default {
 .search-users-result ul {
     padding: 0; 
     margin: 0.5vw; 
+}
+
+.profile-picture {
+    width: 2vw;
+    height: 2vh; 
+    border-radius: 50%;
+    margin-right: 0.5vw;
 }
 </style>
