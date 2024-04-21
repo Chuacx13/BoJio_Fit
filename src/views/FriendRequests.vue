@@ -1,13 +1,24 @@
 <template>
     <div class = "friendRequests-view">
-        <h1 class="friends-request-header"> Friend Requests </h1>
-        <h2 v-if="friendRequests.length > 0">Here are your current friend requests!</h2>
-        <ul v-if="friendRequests.length > 0" v-for="request in friendRequests" class="friends-request-display">
-            <span>User <strong>{{ request.username }}</strong> wants to be your friend.</span>
-            <button @click="acceptRequest(request)" class="request-button-accept">Accept</button>
-            <button @click="declineRequest(request)" class="request-button-decline">Decline</button>
-        </ul>
-        <p v-else class="friends-request-display">No friend requests currently...</p>
+        <div class="left-container">
+            <div class="left-text">
+                <h3><span class="white-text">ADD NEW</span><br/><span class="orange-text">FRIENDS</span></h3>
+            </div>
+            <div class="encouragement-text">
+                <p>Your friend found you.<br>Accept their friend request now to<br>start tracking each other's progress!</p>
+            </div>
+        </div>
+        <div class="right-container">
+            <h1 class="friends-request-header"> Friend Requests </h1>
+            <ul v-if="friendRequests.length > 0" class="friends-request-display">
+                <li v-for="request in friendRequests">
+                    <span>User <strong>{{ request.username }}</strong> wants to be your friend.</span>
+                    <button @click="acceptRequest(request)" class="request-button-accept">Accept</button>
+                    <button @click="declineRequest(request)" class="request-button-decline">Decline</button>
+                </li>
+            </ul>
+            <p v-else class="friends-request-display">No friend requests currently...</p>
+        </div>
     </div>
 </template>
   
@@ -98,60 +109,109 @@ export default {
 <style scoped>
 .friendRequests-view {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
     background-color: rgb(46, 46, 46);
-    min-height: 100vh;
+    min-height: 100vw;
 }
+
+.left-container {
+    width: 60%; 
+    position: fixed;
+    background-color: #2E2E2E;
+    height: 80vh;
+    overflow-y: auto;
+}
+
+.left-text h3 {
+    position: absolute;
+    left: 10%;
+    top: 40%;  
+    font-size: 4vmax;
+    margin: 0; 
+    text-align: left;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.orange-text {
+    color: orange;
+}
+
+.white-text {
+    color: white;
+}
+
+.encouragement-text { 
+    position: absolute;
+    left: 10%;
+    top: 45%;
+    transform: translateY(100%);
+    text-align: left; 
+    color: white;
+    font-size: 1.2vmax; 
+    font-weight: normal; 
+    margin: 1; 
+    white-space: nowrap; 
+ }
 
 .friends-request-header {
     position: absolute;
     top: 10%;
     color: orange;
     align-items: center;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    font-size: 30px;
+    margin-top: 4.4vh;
+    margin-bottom: 2.2vh;
+    font-size: 2vw;
 }
 
-.friendRequests-view h2 {
-    position: absolute;
-    top: 15%;
+.right-container {
+    width: 50%; 
+    margin-left: 40%; 
+    margin-top: 2.2vh;
+    overflow-y: auto;
+    background-color: #2E2E2E;
     color: white;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    font-size: 24px;
+    display: flex;
 }
 
 .friends-request-display {
     position: absolute;
     top: 20%;
-    display: flex;
-    width: 41%;
-    align-items: center;
-    margin-top: 20px;
-    padding: 40px;
+    width: 50%;
+    margin-top: 2.2vh;
+    padding: 30px;
     background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
     border-radius: 10px;
     color: white;
-    font-size: 25px;
+    font-size: 20px;
 }
 
-.friends-request-display span {
-    font-size: 25px;
-    margin: 10px;
+.friends-request-display li {
+    list-style: none;
+    display: flex;
+    position: relative; 
+    padding: 2vh 2vw; 
+    transition: background-color 0.3s; /* Add smooth transition */
 }
 
-.friends-request-display span strong {
+.friends-request-display li:hover {
+    background-color: #363333; /* Highlight on hover */
+}
+
+.friends-request-display li span {
+    font-size: 3vmin;
+    margin: 1.1vmin;
+    width: 50%;
+}
+
+.friends-request-display li span strong {
     font-weight: bold;
     color: orange;
 }
 
 .request-button-accept {
     padding: 15px 30px;
-    margin-left: 26px;
-    margin-right: 26px;
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
     color: white;
     background-color: green;
     border: none;
@@ -162,8 +222,8 @@ export default {
 
 .request-button-decline {
     padding: 15px 30px;
-    margin-left: 26px;
-    margin-right: 26px;
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
     color: white;
     background-color: red;
     border: none;
