@@ -1,6 +1,6 @@
 <template>
     <div class="search-users-bar">
-        <input type="text" v-model="searchQuery" @input="searchUsers" placeholder="Search users by username">
+        <input type="text" v-model="searchQuery" @input="searchUsers" placeholder="Enter username...">
     </div>
     <div class="search-users-result">
         <ul v-show="searchResults.length > 0">
@@ -107,45 +107,45 @@ export default {
 <style scoped>
 .search-users-bar {
     position: absolute;
-    top: 20%; /* Adjust the vertical position */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50%;
+    top: 20vh; 
+    left: 20vw;
+    width: 50vw; 
     display: flex;
     align-items: center;
 }
 
 .search-users-bar input[type="text"] {
-    padding: 10px;
-    width: 100%;
-    color: black;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 20px;
+    width: 50vw; 
+    font-size: 1vw;
+    padding: 1vh 2vw;
+    margin-left: 20vw; 
+    display: flex;
+    background-color: white;
 }
 
 .search-users-result {
     position: absolute;
-    top: 25%; 
-    left: 25%;
-    width: 50%;
-    background-color: white;
-    border-radius: 5px;
+    top: 25vh;
+    left: 40vw;
+    width: 30vw;
+    color: white; 
+    background-color: #3A3A3A;
+    border-radius: 1vw;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow for a nicer look */
-    max-height: 200px; /* Limit the height of search results */
+    max-height: 100vh; /* Limit the height of search results */
     overflow-y: auto; /* Enable scrolling for overflow */
 }
 
 .search-users-result li {
     list-style: none;
-    padding: 20px;
-    border-bottom: 1px solid #ccc;
-    cursor: pointer; /* Change cursor to pointer for better user interaction */
+    position: relative; 
+    padding: 1.5vh 2vw; 
     transition: background-color 0.3s; /* Add smooth transition */
 }
 
 .search-users-result li span {
-    font-size: 25px;
+    font-size: 1.2vw;
+    margin-left: 0vw; 
 }
 
 .search-users-result li:hover {
@@ -153,20 +153,29 @@ export default {
 }
 
 .search-users-result button {
-    margin-left: 30px;
-    padding: 8px 16px;
-    background-color: #007bff;
+    font-size: 1vw; 
+    transform: translateY(-15%);
+    position: absolute; 
+    padding: 0.5vw 1vh;
+    margin-left: 60%; 
+    right: 1vw; 
+    background-color: orange;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5vw;
     cursor: pointer;
 }
 
 .search-users-result button:hover {
-    background-color: #0056b3; /* Darker color on hover */
+    background-color:green; /* Darker color on hover */
 }
 
 .search-users-result li:last-child {
     border-bottom: none;
+}
+
+.search-users-result ul {
+    padding: 0; 
+    margin: 0.5vw; 
 }
 </style>

@@ -119,7 +119,7 @@ body {
     width: 30%; 
     position: fixed;
     background-color: #2E2E2E;
-    height: 100vh;
+    height: 80vh;
     overflow-y: auto;
 }
 
