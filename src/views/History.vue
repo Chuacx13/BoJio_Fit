@@ -117,7 +117,8 @@ body {
     
 .left-container {
     width: 30%; 
-    position: fixed;
+    position: absolute;
+    display: flex; 
     background-color: #2E2E2E;
     height: 80vh;
     overflow-y: auto;
@@ -175,6 +176,7 @@ body {
 }
     
 button {
+    display: flex; 
     border-radius: 1vw;
     border: none;
     padding: 0.7vw;
@@ -194,6 +196,7 @@ button {
 }
 .right-container label {
     margin-left: 1vw;
+    font-size: 1vw; 
   }
 
 .right-container input[type="text"], 

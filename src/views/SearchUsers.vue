@@ -49,14 +49,14 @@ export default {
     width: 30%; 
     position: fixed;
     background-color: #2E2E2E;
-    height: 80vh;
+    height: 100%;
     overflow-y: auto;
 }
 
 .left-text h3 {
     position: absolute;
     left: 10%;
-    top: 40%;  
+    top: 30%;  
     font-size: 4vw;
     margin: 0; 
     text-align: left;
@@ -75,7 +75,7 @@ export default {
 .encouragement-text { 
     position: absolute;
     left: 10%;
-    top: 45%;
+    top: 35%;
     transform: translateY(100%);
     text-align: left; 
     color: white;
@@ -87,7 +87,7 @@ export default {
 .searchUsers-view {
     display: flex;
     background-color: rgb(46, 46, 46);
-    min-height: 100vw;
+    height: 100%;
 }
 
 .searchUsers-header {
