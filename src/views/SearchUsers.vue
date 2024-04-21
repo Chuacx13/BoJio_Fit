@@ -1,17 +1,16 @@
 <template>
-    <div class="searchUsers-view">
-      <div class="left-container">
-        <div class="left-text">
-          <h3><span class="orange-text">Workout</span><br/><span class="white-text">Buddy</span></h3>
+    <div class="overall-container">
+        <div class="left-container">
+            <div class="left-text">
+            <h3><span class="orange-text">WORKOUT</span><br/><span class="white-text">BUDDY</span></h3>
+            </div>
+            <div class="encouragement-text">
+            <p>Find a friend to workout with!<br>Keep each other accountable<br>and hit your fitness goals together!</p>
+            </div>
         </div>
-        <div class="encouragement-text">
-          <p>Find a friend to workout with!<br>Keep each other accountable<br>and hit your fitness goals together!</p>
+        <div class="searchUsers-content">
+            <SearchUsersBar/>
         </div>
-      </div>
-      <div class="searchUsers-content">
-        <h1 class="searchUsers-header">Search Users</h1>
-        <SearchUsersBar/>
-      </div>
     </div>
   </template>
   
@@ -44,26 +43,30 @@ export default {
 </script>
 
 <style scoped>
+  .overall-container {
+    display: flex;
+    min-height: 100vh; 
+    background-color: #2E2E2E; 
+  }
 
-.left-container {
-    width: 30%; 
-    position: fixed;
+  .left-container {
+    width: 40%; 
+    position: absolute;
+    display: flex; 
     background-color: #2E2E2E;
     height: 100%;
     overflow-y: auto;
 }
-
 .left-text h3 {
     position: absolute;
     left: 10%;
-    top: 30%;  
+    top: 35%;  
     font-size: 4vw;
     margin: 0; 
     text-align: left;
     font-weight: bold;
     white-space: nowrap;
 }
-
 .orange-text {
     color: orange;
 }
@@ -75,27 +78,12 @@ export default {
 .encouragement-text { 
     position: absolute;
     left: 10%;
-    top: 35%;
+    top: 40%;
     transform: translateY(100%);
     text-align: left; 
     color: white;
     font-size: 1.1vw; 
     font-weight: normal; 
-    margin: 1; 
     white-space: nowrap; 
  }
-.searchUsers-view {
-    display: flex;
-    background-color: rgb(46, 46, 46);
-    height: 100%;
-}
-
-.searchUsers-header {
-    position: absolute; 
-    display: flex;
-    color: orange;
-    font-size: 1.5vw; 
-    top: 6vw;
-    left: 40vw;
-}
 </style>
