@@ -89,14 +89,15 @@ export default {
 .feed-header {
     color: orange;
     margin: 20px;
+    font-size: 3vw;
 }
 
 .workout-entry {
     background-color: #3E3E3E;
-    padding: 20px;
-    border-radius: 10px;
-    margin: 10px;
-    width: 80%;
+    padding: 1vw 2vh;
+    border-radius: 1vw;
+    margin: 1vw;
+    width: 50%;
 }
 
 .workout-entry h3 {

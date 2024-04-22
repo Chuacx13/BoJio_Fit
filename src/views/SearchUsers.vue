@@ -5,10 +5,11 @@
             <h3><span class="orange-text">WORKOUT</span><br/><span class="white-text">BUDDY</span></h3>
             </div>
             <div class="encouragement-text">
-            <p>Find a friend to workout with!<br>Keep each other accountable<br>and hit your fitness goals together!</p>
+            <p>Find a friend to workout with!<br>Keep each other accountable<br>& hit your fitness goals together!</p>
             </div>
         </div>
         <div class="searchUsers-content">
+            <h2><span class="search-text">Search Users</span></h2>
             <SearchUsersBar/>
         </div>
     </div>
@@ -77,6 +78,7 @@ export default {
 
 .encouragement-text { 
     position: absolute;
+    display: flex; 
     left: 10%;
     top: 40%;
     transform: translateY(100%);
@@ -85,5 +87,15 @@ export default {
     font-size: 1.1vw; 
     font-weight: normal; 
     white-space: nowrap; 
- }
+}
+
+.search-text { 
+    position: absolute; 
+    display: flex; 
+    color: orange; 
+    margin-top: 2vh;
+    margin-bottom: 1vh; 
+    top: 20vh; 
+    left: 40vw; 
+}
 </style>

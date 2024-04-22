@@ -154,16 +154,17 @@
  }
     
 .right-container {
-    width: 50%; 
-    height: 100%; 
-    left: 40%; 
-    overflow-y: auto;
-    background-color: #2E2E2E;
-    color: white;
-    display: flex;
-    position: absolute; 
-    flex-direction: column;
-    }
+  margin-top: 1vh;
+  width: 50%; 
+  height: 100%; 
+  left: 40%; 
+  overflow-y: auto;
+  background-color: #2E2E2E;
+  color: white;
+  display: flex;
+  position: absolute; 
+  flex-direction: column;
+  }
 
 .right-container label {
   margin-left: 1vw;
@@ -177,6 +178,7 @@
   margin: 1vw;
   padding: 0.8vw; 
   font-size: 0.8vw; 
+  border-radius: 0.5vw;
 }
 .workout-entry {
     background-color: #3A3A3A;
@@ -204,7 +206,7 @@ button {
     color: white; 
     font-size: 1vw; 
     margin-left: 1vw; 
-    margin-top: 35%; 
+    margin-top: 40%; 
 }
 
 </style>
