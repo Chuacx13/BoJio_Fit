@@ -122,13 +122,17 @@ export default {
     font-size: 1vw;
     padding: 1vh 2vw;
     margin-left: 20vw; 
+    margin-top: 5vh;
+    margin-bottom: 1vh; 
     display: flex;
     background-color: white;
+    border-radius: 0.5vw;
 }
 
 .search-users-result {
     position: absolute;
-    top: 25vh;
+    margin-top: 1vh; 
+    top: 30vh;
     left: 40vw;
     width: 30vw;
     color: white; 

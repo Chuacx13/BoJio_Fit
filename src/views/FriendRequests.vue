@@ -2,19 +2,23 @@
     <div class = "friendRequests-view">
         <div class="left-container">
             <div class="left-text">
-                <h3><span class="white-text">ADD NEW</span><br/><span class="orange-text">FRIENDS</span></h3>
+                <h3><span class="orange-text">ADD NEW</span><br/><span class="white-text">FRIENDS</span></h3>
             </div>
             <div class="encouragement-text">
                 <p>Your friend found you.<br>Accept their friend request now to<br>start tracking each other's progress!</p>
             </div>
         </div>
         <div class="right-container">
-            <h1 class="friends-request-header"> Friend Requests </h1>
+            <h2 class="friends-request-header"> Friend Requests </h2>
             <ul v-if="friendRequests.length > 0" class="friends-request-display">
-                <li v-for="request in friendRequests">
-                    <span>User <strong>{{ request.username }}</strong> wants to be your friend.</span>
-                    <button @click="acceptRequest(request)" class="request-button-accept">Accept</button>
-                    <button @click="declineRequest(request)" class="request-button-decline">Decline</button>
+                <li v-for="request in friendRequests" class="friend-request-item">
+                    <div class="friend-request-text">
+                        <span><strong>{{ request.username }}</strong> has requested to follow you.</span>
+                    </div>
+                    <div class="request-buttons-container">
+                        <button @click="acceptRequest(request)" class="request-button-accept">Accept</button>
+                        <button @click="declineRequest(request)" class="request-button-decline">Delete</button>
+                    </div>
                 </li>
             </ul>
             <p v-else class="friends-request-display">No friend requests currently...</p>
@@ -120,23 +124,24 @@ export default {
 <style scoped>
 .friendRequests-view {
     display: flex;
-    background-color: rgb(46, 46, 46);
-    min-height: 100vw;
+    background-color: #2E2E2E;
+    min-height: 100vh;
 }
 
 .left-container {
-    width: 60%; 
-    position: fixed;
+    width: 40%; 
+    position: absolute;
+    display: flex; 
     background-color: #2E2E2E;
-    height: 80vh;
+    height: 100%;
     overflow-y: auto;
 }
 
 .left-text h3 {
     position: absolute;
     left: 10%;
-    top: 40%;  
-    font-size: 4vmax;
+    top: 35%;  
+    font-size: 4vw;
     margin: 0; 
     text-align: left;
     font-weight: bold;
@@ -154,63 +159,54 @@ export default {
 .encouragement-text { 
     position: absolute;
     left: 10%;
-    top: 45%;
+    top: 40%;
     transform: translateY(100%);
     text-align: left; 
     color: white;
-    font-size: 1.2vmax; 
+    font-size: 1.1vw; 
     font-weight: normal; 
     margin: 1; 
     white-space: nowrap; 
  }
+    
+ .right-container {
+  margin-top: 1vh;
+  width: 50%; 
+  height: 100%; 
+  left: 40%; 
+  overflow-y: auto;
+  background-color: #2E2E2E;
+  color: white;
+  display: flex;
+  position: absolute; 
+  flex-direction: column;
+  }
 
 .friends-request-header {
-    position: absolute;
-    top: 10%;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
     color: orange;
-    align-items: center;
-    margin-top: 4.4vh;
-    margin-bottom: 2.2vh;
-    font-size: 2vw;
-}
-
-.right-container {
-    width: 50%; 
-    margin-left: 40%; 
-    margin-top: 2.2vh;
-    overflow-y: auto;
-    background-color: #2E2E2E;
-    color: white;
-    display: flex;
+    font-size: 1.5vw; 
 }
 
 .friends-request-display {
-    position: absolute;
-    top: 20%;
-    width: 50%;
-    margin-top: 2.2vh;
-    padding: 30px;
-    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-    border-radius: 10px;
-    color: white;
-    font-size: 20px;
+    background-color: #3A3A3A;
+    border-radius: 1vw;
+    padding: 1vw 1vh;
 }
 
 .friends-request-display li {
     list-style: none;
-    display: flex;
-    position: relative; 
-    padding: 2vh 2vw; 
-    transition: background-color 0.3s; /* Add smooth transition */
+    transition: background-color 0.3s;
 }
 
 .friends-request-display li:hover {
-    background-color: #363333; /* Highlight on hover */
+    background-color: #363333;
 }
 
 .friends-request-display li span {
-    font-size: 3vmin;
-    margin: 1.1vmin;
+    font-size: 1.5vw;
+    margin-left: 1vw;
     width: 50%;
 }
 
@@ -219,35 +215,46 @@ export default {
     color: orange;
 }
 
-.request-button-accept {
-    padding: 15px 30px;
-    margin-left: 2.5vw;
-    margin-right: 2.5vw;
+.request-buttons-container {
+    display: flex; 
+    position: relative; 
+    align-items: center;
+}
+
+.request-button-accept,
+.request-button-decline {
+    font-size: 0.7vw; 
+    position: absolute; 
+    display: flex;
+    padding: 0.5vw 1vh;
+    right: 5vw; 
+    background-color: red;
     color: white;
-    background-color: green;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5vw;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth background color transition */
+    transition: background-color 0.3s ease;
+    margin-bottom: 2.5vh; 
+}
+
+.request-button-accept {
+    background-color: green;
+    color: white;
+    right: 6vw;
 }
 
 .request-button-decline {
-    padding: 15px 30px;
-    margin-left: 2.5vw;
-    margin-right: 2.5vw;
-    color: white;
     background-color: red;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth background color transition */
+    color: white;
+    right: 2vw;
 }
 
 .request-button-accept:hover {
-    background-color: rgb(3, 92, 3); /* Darker color on hover */
+    background-color: rgb(3, 92, 3);
 }
 
 .request-button-decline:hover {
-    background-color: rgb(191, 8, 8); /* Darker color on hover */
+    background-color: rgb(191, 8, 8);
 }
+
 </style>
