@@ -74,22 +74,31 @@ export default {
             const db = getFirestore();
             // Get document reference from "Workouts" collection with unique "uid" document 
             const workoutDocRef = doc(db, 'Workouts', this.user.uid);
-
+            const badgesDocRef = doc(db, 'Badges', this.user.uid);
             try {
                 // Get document from "Workouts" collection with unique "uid" document 
-                const docSnap = await getDoc(workoutDocRef);
+                const docWorkoutSnap = await getDoc(workoutDocRef);
+                // Get document from "Badges" collection with unique "uid" document 
+                const docBadgesSnap = await getDoc(badgesDocRef);
 
                 // If document exist, get workoutList and update it with new workout
-                if (docSnap.exists()) {
-                    const currentData = docSnap.data();
-                    const updatedWorkoutList = [...currentData.workoutList, {
+                if (docWorkoutSnap.exists()) {
+                    const currentWorkoutData = docWorkoutSnap.data();
+                    const updatedWorkoutList = [...currentWorkoutData.workoutList, {
                         date: this.date,
                         workoutName: this.workoutName,
                         exercises: this.exercises,
                         duration: this.duration
                     }];
 
+
+                    const currNumofWorkouts = docBadgesSnap.data().totalNumofWorkouts;
+                    const currWorkoutMinutes = docBadgesSnap.data().totalWorkoutMinutes;
                     await setDoc(workoutDocRef, { workoutList: updatedWorkoutList });
+                    await setDoc(badgesDocRef, { 
+                        totalNumofWorkouts: currNumofWorkouts + 1, 
+                        totalWorkoutMinutes: currWorkoutMinutes + this.duration
+                    })
                 //If document do not exist, set workoutList with new workout
                 } else {
                     await setDoc(workoutDocRef, {
@@ -100,6 +109,11 @@ export default {
                             duration: this.duration
                         }]
                     });
+
+                    await setDoc(badgesDocRef, { 
+                        totalNumofWorkouts: 1, 
+                        totalWorkoutMinutes: this.duration
+                    })
                 }
                 //Reload page after successful saving of workout
                 window.location.reload();
