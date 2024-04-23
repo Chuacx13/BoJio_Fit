@@ -108,7 +108,7 @@
  
 .container {
     display: flex;
-    min-height: 220vh;
+    min-height: 100vh;
     background-color: rgb(46, 46, 46);
 }
     
@@ -129,7 +129,6 @@
     margin: 0; 
     text-align: left;
     font-weight: bold;
-    white-space: nowrap;
 }
 
 .orange-text {
@@ -142,6 +141,7 @@
 
 .encouragement-text { 
     position: absolute;
+    display: flex; 
     left: 10%;
     top: 40%;
     transform: translateY(100%);
@@ -149,20 +149,19 @@
     color: white;
     font-size: 1.1vw; 
     font-weight: normal; 
-    margin: 1; 
     white-space: nowrap; 
  }
     
 .right-container {
   margin-top: 1vh;
+  margin-bottom: 10vh;
   width: 50%; 
-  height: 100%; 
+  height: 80%; 
   left: 40%; 
-  overflow-y: auto;
   background-color: #2E2E2E;
   color: white;
   display: flex;
-  position: absolute; 
+  position: relative; 
   flex-direction: column;
   }
 

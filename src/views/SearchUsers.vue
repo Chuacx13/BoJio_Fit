@@ -93,9 +93,8 @@ export default {
     position: absolute; 
     display: flex; 
     color: orange; 
-    margin-top: 2vh;
     margin-bottom: 1vh; 
-    top: 20vh; 
+    top: 10vh; 
     left: 40vw; 
 }
 </style>

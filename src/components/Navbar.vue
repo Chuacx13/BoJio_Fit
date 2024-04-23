@@ -81,14 +81,13 @@ export default {
 }
 
 .navbar-logo {
-    height: 8vh; 
-    width: auto; 
-    margin-top: 2vh; 
+    padding: 1vh 1.5vw ; 
+    max-width: 5%; 
 }
 
 .nav-route, #btn {
     color: white;
-    padding: 1vh 2vw; 
+    padding: 1vh 1.5vw; 
     text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
     font-size: 1vw; 

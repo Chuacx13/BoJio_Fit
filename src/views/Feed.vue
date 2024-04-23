@@ -68,7 +68,7 @@ export default {
             if (workoutSnapshot.exists()) {
                 const workoutData = workoutSnapshot.data().workoutList;
                 workoutData.forEach(workout => {
-                    this.workouts.push({ ...workout, username: friendUsername });
+                    this.workouts.push({ ...workout, username: friendUsername +'S' });
                 });
             }
         }
@@ -84,11 +84,11 @@ export default {
     background-color: #2E2E2E;
     color: white;
     min-height: 100vh;
+    margin-bottom: 10vh;
 }
 
 .feed-header {
     color: orange;
-    margin: 20px;
     font-size: 3vw;
 }
 
@@ -96,8 +96,9 @@ export default {
     background-color: #3E3E3E;
     padding: 1vw 2vh;
     border-radius: 1vw;
-    margin: 1vw;
+    margin: 0.5vh;
     width: 50%;
+    font-size: 1vw; 
 }
 
 .workout-entry h3 {

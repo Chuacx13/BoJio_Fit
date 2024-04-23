@@ -132,6 +132,7 @@ export default {
     width: 40%; 
     position: absolute;
     display: flex; 
+    flex-direction: column; 
     background-color: #2E2E2E;
     height: 100%;
     overflow-y: auto;
@@ -165,39 +166,41 @@ export default {
     color: white;
     font-size: 1.1vw; 
     font-weight: normal; 
-    margin: 1; 
     white-space: nowrap; 
  }
     
  .right-container {
-  margin-top: 1vh;
   width: 50%; 
-  height: 100%; 
   left: 40%; 
   overflow-y: auto;
   background-color: #2E2E2E;
   color: white;
-  display: flex;
   position: absolute; 
-  flex-direction: column;
   }
 
 .friends-request-header {
-    margin-top: 2vh;
-    margin-bottom: 1vh;
     color: orange;
-    font-size: 1.5vw; 
+    font-size: 2vw; 
+}
+
+.friend-request-item {
+    background-color: #3A3A3A; 
+    border-radius: 1vw;
+    padding: 1vw 2vh; 
+    margin-bottom: 1vh; 
+    width: 80%; 
 }
 
 .friends-request-display {
-    background-color: #3A3A3A;
-    border-radius: 1vw;
-    padding: 1vw 1vh;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
 }
 
 .friends-request-display li {
     list-style: none;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s;  
 }
 
 .friends-request-display li:hover {
@@ -205,9 +208,7 @@ export default {
 }
 
 .friends-request-display li span {
-    font-size: 1.5vw;
-    margin-left: 1vw;
-    width: 50%;
+    font-size: 1.2vw; 
 }
 
 .friends-request-display li span strong {
@@ -224,29 +225,27 @@ export default {
 .request-button-accept,
 .request-button-decline {
     font-size: 0.7vw; 
-    position: absolute; 
+    position: absolute;
     display: flex;
     padding: 0.5vw 1vh;
-    right: 5vw; 
-    background-color: red;
     color: white;
     border: none;
     border-radius: 0.5vw;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-bottom: 2.5vh; 
+    margin-bottom: 2.4vh; 
 }
 
 .request-button-accept {
     background-color: green;
     color: white;
-    right: 6vw;
+    right: 10%;
 }
 
 .request-button-decline {
     background-color: red;
     color: white;
-    right: 2vw;
+    right: 0%;
 }
 
 .request-button-accept:hover {

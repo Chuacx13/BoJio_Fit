@@ -110,7 +110,7 @@ export default {
 <style scoped>
 .search-users-bar {
     position: absolute;
-    top: 20vh; 
+    top: 15vh; 
     left: 20vw;
     width: 50vw; 
     display: flex;
@@ -118,13 +118,16 @@ export default {
 }
 
 .search-users-bar input[type="text"] {
-    width: 50vw; 
+    width: 25vw; 
+    height: 1vh; 
+    margin: 1vw;
     font-size: 1vw;
     padding: 1vh 2vw;
     margin-left: 20vw; 
     margin-top: 5vh;
     margin-bottom: 1vh; 
     display: flex;
+    position: fixed;
     background-color: white;
     border-radius: 0.5vw;
 }
@@ -132,9 +135,9 @@ export default {
 .search-users-result {
     position: absolute;
     margin-top: 1vh; 
-    top: 30vh;
+    top: 19vh;
     left: 40vw;
-    width: 30vw;
+    width: 29vw;
     color: white; 
     background-color: #3A3A3A;
     border-radius: 1vw;
@@ -146,7 +149,7 @@ export default {
 .search-users-result li {
     list-style: none;
     position: relative; 
-    padding: 1.5vh 2vw; 
+    padding: 1vw 1vh; 
     transition: background-color 0.3s; /* Add smooth transition */
 }
 
