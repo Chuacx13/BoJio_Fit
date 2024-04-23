@@ -64,14 +64,14 @@ export default {
     display: flex;
     justify-content: center; 
     align-items: center;
-    width: 100%;
-    height: 100px;
+    width: 100vw; 
+    height: 10vh; 
     z-index: 1000;
     background-color: rgb(46, 46, 46);
     box-sizing: border-box;
 }
 
-.navbar-transparent{
+.navbar-transparent {
     background-color: transparent;
     position: fixed;
 }
@@ -81,19 +81,20 @@ export default {
 }
 
 .navbar-logo {
-    height: 150px; 
+    height: 8vh; 
     width: auto; 
-    margin-top: 20px; 
+    margin-top: 2vh; 
 }
 
 .nav-route, #btn {
     color: white;
-    padding: 10px 40px 10px 40px; 
+    padding: 1vh 2vw; 
     text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
-    font-size: 15px; 
+    font-size: 1vw; 
     font-weight: bold; 
     white-space: nowrap;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .nav-route:hover, #btn:hover {
@@ -106,6 +107,7 @@ export default {
     border: none;
     cursor: pointer;
     text-decoration: none;
+    font-size: 1vw;
 }
 
 #btn:hover {
@@ -114,6 +116,6 @@ export default {
 }
 
 .profile-link {
-    border: 1px solid white;
+    border: 0;
 }
 </style>
