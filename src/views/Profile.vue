@@ -30,7 +30,7 @@
                     <div class = "badge-container">
                         <img src="@/assets/badge_icon1.png" alt="Badge Icon" class = "workout-badge">
                         <div class = "badge-text"> {{ flooredWorkouts }} WORKOUTS </div>
-                        <strong class = "badge-attained"> {{ flooredWorkouts > 0 ? flooredWorkouts + ' WORKOUT BADGE ATTAINED!' : 'NO WORKOUT BADGE ATTAINED YET' }} </strong>
+                        <strong class = "badge-attained"> {{ flooredWorkouts > 0 ? flooredWorkouts + ' WORKOUT BADGE ATTAINED!' : 'NO WORKOUT BADGE ATTAINED YET!' }} </strong>
                     </div>
                     <strong class = "quantity-indicator"> Current Number of Workouts : {{ workoutInfo.length }}</strong>
                 </div>
@@ -40,7 +40,7 @@
                     <div class = "badge-container">
                         <img src="@/assets/badge_icon1.png" alt="Badge Icon" class = "workout-badge">
                         <div class = "badge-text"> {{ flooredWorkoutHours }} TOTAL HOURS </div>
-                        <strong class = "badge-attained"> {{ flooredWorkoutHours > 0 ? flooredWorkoutHours + ' WORKOUT HOURS BADGE ATTAINED!' : 'NO WORKOUT HOURS BADGE ATTAINED YET' }} </strong>
+                        <strong class = "badge-attained"> {{ flooredWorkoutHours > 0 ? flooredWorkoutHours + ' WORKOUT HOURS BADGE ATTAINED!' : 'NO WORKOUT HOURS BADGE ATTAINED YET!' }} </strong>
                     </div>
                     <strong class = "quantity-indicator"> Current Number of Workout Hours : {{ calculateTotalHours().toFixed(2) }} </strong>
                 </div>
@@ -50,7 +50,7 @@
                     <div class = "badge-container">
                         <img src="@/assets/badge_icon1.png" alt="Badge Icon" class = "workout-badge">
                         <div class = "badge-text"> {{ numberOfBadges }} TOTAL BADGES </div>
-                        <strong class = "badge-attained"> {{ numberOfBadges > 1 ? numberOfBadges + ' BADGES ATTAINED!' : numberOfBadges == 1 ? '1 BADGE ATTAINED!' : 'NO BADGES ATTAINED YET' }} </strong>
+                        <strong class = "badge-attained"> {{ numberOfBadges > 1 ? numberOfBadges + ' BADGES ATTAINED!' : numberOfBadges == 1 ? '1 BADGE ATTAINED!' : 'NO BADGES ATTAINED YET!' }} </strong>
                     </div>
                     <strong class = "quantity-indicator"> Current Number of Badges : {{ numberOfBadges }} </strong>
                 </div>
@@ -175,7 +175,7 @@ export default {
 }
 
 .user-item strong {
-    min-width: 100px; 
+    min-width: 5vw; 
 }
 
 .user-item span {
@@ -202,8 +202,9 @@ export default {
 }
 
 .profile-picture {
-    width: 80px; 
-    height: auto; 
+    width: 6vw; 
+    height: 8vh; 
+    border-radius: 50%;
     margin-right: 5vw;
 }
 
