@@ -36,7 +36,7 @@ export default {
 .promotional-text p {
     -webkit-text-stroke: 2px orange; 
     color: transparent;
-    font-size: 4em; 
+    font-size: 5vw; 
     margin: 0; 
     text-align: center;
     font-weight: bold; 
@@ -45,9 +45,9 @@ export default {
 
 .tracking-text p {
     color: white;
-    font-size: 2.2em; 
+    font-size: 2.5vw; 
     font-weight: bold; 
-    margin: 1; 
+    margin: 3vh; 
     white-space: nowrap; 
 }
 </style>
