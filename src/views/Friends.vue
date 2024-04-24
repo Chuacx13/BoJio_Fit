@@ -187,7 +187,7 @@ export default {
 }
 
 .friends-display li span {
-    font-size: 1.3vw;
+    font-size: 1.4vw;
     width: 60%;
 }
 
