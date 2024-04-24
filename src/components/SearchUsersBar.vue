@@ -89,7 +89,6 @@ export default {
                             ...(userData.friendRequests || []), // Ensure existing requests are preserved
                             {
                                 userID: this.user.uid,
-                                username: currentUsername
                             }
                         ];
                         await setDoc(userDocRef, { friendRequests: updatedFriendRequests }, { merge: true });
