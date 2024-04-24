@@ -3,7 +3,6 @@
         <div class="form-container">
             <form @submit.prevent="signup">
                 <h1 class="signup-header"> Create New Account </h1>
-                <input type="text" v-model="username" placeholder="Username" required>
                 <input type="email" v-model="email" placeholder="Email" required>
                 <input type="password" v-model="password" placeholder="Password" required>
                 <input type="password" v-model="confirmPassword" placeholder="Confirm Password" required>
@@ -61,9 +60,9 @@ export default {
                     const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
                     const user = userCredential.user;
                     const userDocRef = doc(db, 'Users', user.uid);
-                    await setDoc(userDocRef, { username: this.username, uid: user.uid, friendRequests: [], friends: [] });
+                    await setDoc(userDocRef, { uid: user.uid, friendRequests: [], friends: [] });
                     alert('Successfully Signed Up');
-                    this.$router.push('/');
+                    this.$router.push('/setupprofile');
                 } else {
                     alert ('Different Password');
                 }
@@ -115,7 +114,7 @@ export default {
     width: 100%;
     max-width: 340px; 
     height: 100%;
-    max-height: 460px;
+    max-height: 400px;
 }
   
 input {
