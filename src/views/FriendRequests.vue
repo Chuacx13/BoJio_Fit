@@ -80,8 +80,6 @@ export default {
             const db = getFirestore();
             const userDocRef = doc(db, 'Users', this.user.uid);
             const userDocSnapshot = await getDoc(userDocRef);
-            console.log(request.userID);
-            console.log(request.username);
             try {
                 const userData = userDocSnapshot.data();
                 await updateDoc(userDocRef, {
@@ -174,9 +172,9 @@ export default {
     font-size: 1.1vw; 
     font-weight: normal; 
     white-space: nowrap; 
- }
+}
     
- .right-container {
+.right-container {
   width: 50%; 
   left: 40%; 
   overflow-y: auto;
@@ -218,7 +216,7 @@ export default {
 }
 
 .friends-request-display li span {
-    font-size: 1vw; 
+    font-size: 1.2vw; 
 }
 
 .friends-request-display li span strong {
@@ -235,7 +233,7 @@ export default {
 
 .request-button-accept,
 .request-button-decline {
-    font-size: 0.7vw; 
+    font-size: 0.9vw; 
     position: absolute;
     display: flex;
     padding: 0.5vh 1vw;
