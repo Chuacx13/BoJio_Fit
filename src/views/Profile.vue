@@ -176,7 +176,8 @@ export default {
 }
 
 .user-item strong {
-    min-width: 5vw; 
+    min-width: 5vw;
+    font-size: 1vw;
 }
 
 .user-item span {
@@ -284,6 +285,7 @@ export default {
     height: 10%;
     font-size: 1vw;
     color: orange;
+    margin-bottom: 1vh;
 }
 
 .badge-text {
@@ -296,7 +298,7 @@ export default {
 }
 
 .badge-attained {
-    font-size: 1vw;
+    font-size: 0.8vw;
     color: orange;
 }
 
@@ -311,6 +313,6 @@ export default {
     padding: 1vh 5vw;
     cursor: pointer;
     margin-left: auto;
+    min-height: 20%;
 }
-
 </style>

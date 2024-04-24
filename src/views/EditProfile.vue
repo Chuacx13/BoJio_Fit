@@ -119,7 +119,7 @@ export default {
     display: flex;
     justify-content: center;
     background-color: rgb(46, 46, 46);
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     min-height: 100vh; 
     text-align: center;
@@ -127,13 +127,15 @@ export default {
 
 .form {
     margin-top: 10vh;
+    width: 100%;
+    height: 60%;
+    margin-bottom: 10vh;
 }
 
 .form-group {
     display: flex;
     align-items: center;
     margin-top: 5vh;
-
 }
 
 label {
@@ -141,6 +143,7 @@ label {
     margin-right: 2vw;
     display: block;
     color: white;
+    font-size: 0.7vw;
 }
 
 input, select {
@@ -160,5 +163,6 @@ button {
     border-radius: 1vw;
     cursor: pointer;
     margin-top: 5vh;
+    font-size: 0.7vw;
 }
 </style>

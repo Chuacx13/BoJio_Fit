@@ -176,29 +176,32 @@ export default {
   background-color: #2E2E2E;
   color: white;
   position: absolute; 
-  }
+}
 
 .friends-request-header {
     color: orange;
     font-size: 2vw; 
+    margin-bottom: 0;
 }
 
 .friend-request-item {
     background-color: #3A3A3A; 
     border-radius: 1vw;
     padding: 1vw 2vh; 
-    margin-bottom: 1vh; 
-    width: 80%; 
+    margin-bottom: 1.5vh; 
 }
 
 .friends-request-display {
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-
+    position: fixed;
+    width: 40%; 
+    border-radius: 0.5vw;
+    color: white;
+    font-size: 1vw;
+    padding: 0.5vh; 
 }
 
 .friends-request-display li {
+    justify-content: space-between;
     list-style: none;
     transition: background-color 0.3s;  
 }
@@ -208,7 +211,7 @@ export default {
 }
 
 .friends-request-display li span {
-    font-size: 1.2vw; 
+    font-size: 1vw; 
 }
 
 .friends-request-display li span strong {
@@ -220,6 +223,7 @@ export default {
     display: flex; 
     position: relative; 
     align-items: center;
+    justify-content: space-between;
 }
 
 .request-button-accept,
@@ -227,25 +231,27 @@ export default {
     font-size: 0.7vw; 
     position: absolute;
     display: flex;
-    padding: 0.5vw 1vh;
+    padding: 0.5vh 1vw;
     color: white;
     border: none;
     border-radius: 0.5vw;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-bottom: 2.4vh; 
+    margin-bottom: 1vw;
 }
 
 .request-button-accept {
     background-color: green;
     color: white;
     right: 10%;
+    margin-right: 1vw;
 }
 
 .request-button-decline {
     background-color: red;
     color: white;
     right: 0%;
+    margin-left: 1vw; 
 }
 
 .request-button-accept:hover {

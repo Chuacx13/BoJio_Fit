@@ -110,19 +110,17 @@ export default {
 <style scoped>
 .search-users-bar {
     position: absolute;
-    top: 15vh; 
+    top: 17vh; 
     left: 20vw;
-    width: 50vw; 
     display: flex;
     align-items: center;
 }
 
 .search-users-bar input[type="text"] {
-    width: 25vw; 
+    width: 20vw; 
     height: 1vh; 
-    margin: 1vw;
     font-size: 1vw;
-    padding: 1vh 2vw;
+    padding: 1vh 1vw;
     margin-left: 20vw; 
     margin-top: 5vh;
     margin-bottom: 1vh; 
@@ -133,29 +131,28 @@ export default {
 }
 
 .search-users-result {
+    justify-content: space-between;
     position: absolute;
-    margin-top: 1vh; 
-    top: 19vh;
+    margin-top: 2vh; 
+    top: 20vh;
     left: 40vw;
-    width: 29vw;
+    width: 22vw;
     color: white; 
     background-color: #3A3A3A;
     border-radius: 1vw;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow for a nicer look */
-    max-height: 100vh; /* Limit the height of search results */
     overflow-y: auto; /* Enable scrolling for overflow */
 }
 
 .search-users-result li {
     list-style: none;
     position: relative; 
-    padding: 1vw 1vh; 
+    padding: 1vw 0.5vh; 
     transition: background-color 0.3s; /* Add smooth transition */
 }
 
 .search-users-result li span {
-    font-size: 1.2vw;
-    margin-left: 0vw; 
+    font-size: 1vw; 
 }
 
 .search-users-result li:hover {
@@ -193,6 +190,7 @@ export default {
     width: 2vw;
     height: 2vh; 
     border-radius: 50%;
-    margin-right: 0.5vw;
+    margin-right: vw;
+    position: relative;
 }
 </style>
