@@ -41,7 +41,7 @@
 
 <script> 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDoc, getDocs, collection, query, where } from "firebase/firestore";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 export default {
@@ -97,6 +97,13 @@ export default {
             const userDocRef = doc(db, 'Users', this.user.uid);
             const docSnap = await getDoc(userDocRef);
 
+            const isDuplicateUsername = await this.checkDuplicateUsername(this.name);
+            if (isDuplicateUsername) {
+                console.error('Username already exists. Please choose a different username.');
+                alert('Username already exists. Please choose a different username.');
+                return;
+            }
+
             try {
                 if (docSnap.exists()) {
                     await setDoc(userDocRef, {
@@ -145,6 +152,15 @@ export default {
             } catch (error) {
                 console.error("Error uploading image:", error);
             }   
+        }, 
+
+        async checkDuplicateUsername(username) {
+            const db = getFirestore();
+            const usersCollectionRef = collection(db, 'Users');
+            const querySnapshot = await getDocs(query(usersCollectionRef, where('username', '==', username)));
+            const currentUserUid = this.user.uid;
+            const filteredDocs = querySnapshot.docs.filter(doc => doc.id !== currentUserUid);
+            return !(filteredDocs.length === 0);
         }
     }
 }
