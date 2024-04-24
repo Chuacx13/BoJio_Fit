@@ -14,6 +14,7 @@
                 <li v-for="friend in friends">
                     <span><strong>{{ friend.username }}</strong> is your friend.</span>
                 <button @click="redirectToFriendProfile(friend.userID)" class="view-profile-button">View Profile</button>
+                <button @click="deleteFriend(friend.userID)" class="delete-friend-button">Delete Friend</button>
                 </li>
             </ul>
             <p v-else class="friends-display">You have no friends currently...</p>
@@ -23,7 +24,7 @@
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, getDoc, getDocs, collection, query, where } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, getDocs, collection, query, where, updateDoc } from 'firebase/firestore';
 
 export default {
     name: "Friends",
@@ -70,8 +71,27 @@ export default {
                 console.log(error);
             }
         },
+
         redirectToFriendProfile(friendId) {
             this.$router.push({ name: 'FriendProfile', params: { friendId } });
+        },
+
+        async deleteFriend(friendId) {
+            const db = getFirestore();
+            const userDocRef = doc(db, 'Users', this.user.uid);
+            const otherUserDocRef = doc(db, 'Users', friendId);
+            try {
+                await updateDoc(userDocRef, {
+                    friends: this.friends.filter(friend => friend.userID !== friendId)
+                });
+                await updateDoc(otherUserDocRef, {
+                    friends: this.friends.filter(friend => friend.userID !== this.user.uid)
+                }); 
+                alert('friend deleted');
+                window.location.reload();
+            } catch (error) {
+                console.error('Error declining request:', error);
+            }
         }
     }
 }
@@ -128,7 +148,7 @@ export default {
     
  .right-container {
     position: relative;
-    width: 50%; 
+    width: 60%; 
     left: 40%; 
     overflow-y: auto;
     background-color: #2E2E2E;
@@ -144,7 +164,7 @@ export default {
 
 .friends-display {
     position: relative;
-    width: 50%; 
+    width: 60%; 
     background-color: #3A3A3A;
     border-radius: 0.5vw;
     color: white;
@@ -158,7 +178,7 @@ export default {
     list-style: none;
     display: flex;
     position: relative; 
-    padding: 1vh 0.2vw;
+    padding: 1vh 0.3vw;
     transition: background-color 0.3s; /* Add smooth transition */
 }
 
@@ -167,8 +187,8 @@ export default {
 }
 
 .friends-display li span {
-    font-size: 1vw;
-    width: 50%;
+    font-size: 1.3vw;
+    width: 60%;
 }
 
 .friends-display li span strong {
@@ -177,7 +197,7 @@ export default {
 }
 
 .view-profile-button {
-    font-size: 0.5vw;
+    font-size: 0.7vw;
     padding: 0.5vw;
     color: white;
     background-color: orange;
@@ -187,7 +207,22 @@ export default {
     transition: background-color 0.3s ease; /* Smooth background color transition */
 }
 
+.delete-friend-button {
+    font-size: 0.7vw; 
+    padding: 0.5vw;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 0.5vw;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 .view-profile-button:hover {
-    background-color: green; /* Darker color on hover */
+    background-color: green; 
+}
+
+.delete-friend-button:hover {
+    background-color: rgb(171, 5, 5); /* Darker color on hover */
 }
 </style>
