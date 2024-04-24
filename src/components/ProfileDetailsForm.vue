@@ -30,42 +30,93 @@
                 <label for="tele">Telegram Handle:</label>
                 <input type="text" id="telegram" v-model="telegram" required>
             </div>
+            <div class="form-group">
+                <label for="profilePicture">Profile Picture:</label>
+                <input type="file" id="profilePicture" accept="image/*" @change="handleProfilePicChange">
+            </div>
             <button type="submit">Save</button>
         </div>    
     </form>
 </template>
 
 <script> 
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+
 export default {
-    name: 'ProfileDetailsForm'
+    name: 'ProfileDetailsForm',
+
+    data() {
+        return {
+             user: false,
+             name: '',
+             age: '',
+             gender: '',
+             height: '',
+             weight: '',
+             telegram: '',
+             profilePicture: null
+        }
+    }, 
+
+    mounted() {
+        const auth = getAuth();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                this.user = user;
+            }
+        })
+    },
+    
+    methods: {
+        async submitForm() {
+            console.log("submitForm method called");
+            const db = getFirestore();
+            // Get document reference from "Workouts" collection with unique "uid" document 
+            const UserDocRef = doc(db, 'Users', this.user.uid);
+
+            try {
+                const docSnap = await getDoc(UserDocRef);
+
+                await setDoc(UserDocRef, {
+                    username: this.name,
+                    Age: this.age,
+                    Gender: this.gender,
+                    Height: this.height,
+                    Weight: this.weight,
+                    Telegram: this.telegram,
+                    profilePicture: this.profilePicture
+                }, {merge: true});
+
+                this.$router.push({ name: 'Home'});
+            } catch (error) {
+                console.error(error);
+            }
+        },
+        async handleProfilePicChange(event) {
+            const file = event.target.files[0];
+            const storage = getStorage();
+            const storageRef = ref(storage, `profile_pictures/${this.user.uid}/${file.name}`);
+
+            try {
+                const snapshot = await uploadBytesResumable(storageRef, file);
+                const dlURL = await getDownloadURL(snapshot.ref);
+                this.profilePicture = dlURL;
+                console.log("Download URL:", dlURL);
+            } catch (error) {
+                console.error("Error uploading image:", error);
+            }   
+        }
+    }
 }
 </script>
 
 <style scoped> 
-.editProfile-view {
-    display: flex;
-    justify-content: center;
-    background-color: rgb(46, 46, 46);
-    height: 100vh;
-    width: 100%;
-    min-height: 100vh; 
-    background-image: url('@/assets/home_background.png');
-    background-size: cover;
-    background-position: center center; 
-    background-repeat: no-repeat; 
-    background-attachment: fixed;
-    text-align: center;
-}
-
-.form {
-    margin-top: 15vh;
-}
-
 .form-group {
     display: flex;
     align-items: center;
-    margin-top: 5vh;
-
+    padding: 20px;
 }
 
 label {
