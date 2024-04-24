@@ -1,6 +1,6 @@
 <template>
     <div class="search-users-bar">
-        <input type="text" v-model="searchQuery" @input="searchUsers" placeholder="Enter username...">
+        <input type="text" v-model="searchQuery" @input="handleSearchInput" placeholder="Enter username...">
     </div>
     <div class="search-users-result">
         <ul v-show="searchResults.length > 0">
@@ -16,6 +16,7 @@
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, getDocs, query, collection, where, getDoc, doc, setDoc } from 'firebase/firestore';
+import { debounce } from 'lodash';
 import defaultProfilePic from '@/assets/default_profile_pic.jpeg';
 
 export default {
@@ -37,6 +38,10 @@ export default {
     },
 
     methods: {
+        debouncedSearchUsers: debounce(function() {
+            this.searchUsers();
+        }, 75),
+
         async searchUsers() {
             this.searchResults = [];
             if (!this.searchQuery) {
@@ -63,6 +68,10 @@ export default {
             } catch(error) {
                 console.error('Error searching users:', error);
             };
+        },
+
+        handleSearchInput() {
+            this.debouncedSearchUsers();
         },
 
         async addFriend(otherUser) {
