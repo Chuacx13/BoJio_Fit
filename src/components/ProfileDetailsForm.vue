@@ -65,35 +65,73 @@ export default {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 this.user = user;
+                this.fetchUserData(user);
             }
         })
     },
     
     methods: {
+        async fetchUserData(user) {
+            const db = getFirestore();
+            const userDocRef = doc(db, 'Users', this.user.uid);
+            const docSnap = await getDoc(userDocRef);
+            try {
+                if (docSnap.exists()) {
+                    const userData = docSnap.data();
+                    this.name = userData.username; 
+                    this.age = userData.Age;
+                    this.gender = userData.Gender;
+                    this.height = userData.Height;
+                    this.weight = userData.Weight;
+                    this.telegram = userData.Telegram;
+                    this.profilePicture = userData.profilePicture;
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
         async submitForm() {
-            console.log("submitForm method called");
             const db = getFirestore();
             // Get document reference from "Workouts" collection with unique "uid" document 
-            const UserDocRef = doc(db, 'Users', this.user.uid);
+            const userDocRef = doc(db, 'Users', this.user.uid);
+            const docSnap = await getDoc(userDocRef);
 
             try {
-                const docSnap = await getDoc(UserDocRef);
-
-                await setDoc(UserDocRef, {
-                    username: this.name,
-                    Age: this.age,
-                    Gender: this.gender,
-                    Height: this.height,
-                    Weight: this.weight,
-                    Telegram: this.telegram,
-                    profilePicture: this.profilePicture
-                }, {merge: true});
-
-                this.$router.push({ name: 'Home'});
+                if (docSnap.exists()) {
+                    await setDoc(userDocRef, {
+                        username: this.name,
+                        Age: this.age,
+                        Gender: this.gender,
+                        Height: this.height,
+                        Weight: this.weight,
+                        Telegram: this.telegram,
+                        profilePicture: this.profilePicture,
+                        uid: this.user.uid, 
+                        friendRequests: docSnap.data().friendRequests, 
+                        friends: docSnap.data().friends
+                    }, {merge: true});
+                    this.$router.push({ name: 'Profile' });
+                } else {
+                    await setDoc(userDocRef, {
+                        username: this.name,
+                        Age: this.age,
+                        Gender: this.gender,
+                        Height: this.height,
+                        Weight: this.weight,
+                        Telegram: this.telegram,
+                        profilePicture: this.profilePicture,
+                        uid: this.user.uid, 
+                        friendRequests: [], 
+                        friends: []
+                    })
+                    this.$router.push({ name: 'Home' });
+                }
             } catch (error) {
                 console.error(error);
             }
         },
+
         async handleProfilePicChange(event) {
             const file = event.target.files[0];
             const storage = getStorage();
