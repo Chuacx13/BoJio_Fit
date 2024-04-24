@@ -92,6 +92,7 @@ export default {
 .search-text { 
     position: absolute; 
     display: flex; 
+    font-size: 2vw;
     color: orange; 
     margin-bottom: 1vh; 
     top: 10vh; 

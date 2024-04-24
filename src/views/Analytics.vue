@@ -116,6 +116,7 @@
     background-color: rgb(46, 46, 46);
     min-height: 100vh;
     justify-content: center;
+    margin-bottom: 10vh; 
   }
   
   #myChart {
