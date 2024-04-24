@@ -170,7 +170,7 @@ export default {
     color: white;
     font-size: 1vw;
     margin: 0; 
-    padding: 0 0.5vw;
+    padding: 1vh 1vw;
 }
 
 .friends-display li {
