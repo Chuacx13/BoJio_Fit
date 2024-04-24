@@ -23,7 +23,7 @@
 
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, getDocs, collection, query, where } from 'firebase/firestore';
 
 export default {
     name: "Friends",
@@ -53,7 +53,16 @@ export default {
             try {
                 if (userDocSnapshot.exists()) {
                     const userData = userDocSnapshot.data();
-                    this.friends = userData.friends;
+                    const friendUserIds = userData.friends.map(friend => friend.userID);
+                    const usersCollectionRef = collection(db, 'Users');
+                    const userQuerySnapshot = await getDocs(query(usersCollectionRef, where('uid', 'in', friendUserIds)));
+                    this.friends = userQuerySnapshot.docs.map(doc => {
+                        return {
+                            userID: doc.data().uid,
+                            username: doc.data().username
+                        };
+                    });
+
                 } else {
                     console.log('error loading friends');
                 }

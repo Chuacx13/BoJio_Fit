@@ -28,7 +28,7 @@
   
 <script>
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc, updateDoc, getDocs, collection, query, where } from 'firebase/firestore';
 
 export default {
     name: "FriendRequests",
@@ -57,8 +57,17 @@ export default {
             const userDocSnapshot = await getDoc(userDocRef);
             try {
                 if (userDocSnapshot.exists()) {
+                    console.log("ran function");
                     const userData = userDocSnapshot.data();
-                    this.friendRequests = userData.friendRequests;
+                    const friendUserIds = userData.friendRequests.map(friendRequest => friendRequest.userID);
+                    const usersCollectionRef = collection(db, 'Users');
+                    const userQuerySnapshot = await getDocs(query(usersCollectionRef, where('uid', 'in', friendUserIds)));
+                    this.friendRequests = userQuerySnapshot.docs.map(doc => {
+                        return {
+                            userID: doc.data().uid,
+                            username: doc.data().username
+                        };
+                    });
                 } else {
                     console.log('error loading friend requests');
                 }
@@ -82,7 +91,6 @@ export default {
                     ...(userData.friends || []), // Ensure existing friends are preserved
                     {
                         userID: request.userID,
-                        username: request.username
                     }
                 ];
                 await setDoc(userDocRef, { friends: updatedFriends }, { merge: true });
@@ -93,7 +101,6 @@ export default {
                     ...(otherUserData.friends || []), // Ensure existing friends are preserved
                     {
                         userID: this.user.uid,
-                        username: userData.username
                     }
                 ];
                 await setDoc(otherUserDocRef, { friends: updatedOtherFriends }, { merge: true });
