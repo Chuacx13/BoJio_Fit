@@ -137,27 +137,27 @@ export default {
 }
 
 label {
-    width: 80px;
-    margin-right: 10px;
+    width: 6vw;
+    margin-right: 2vw;
     display: block;
     color: white;
 }
 
 input, select {
     flex: 1;
-    padding: 8px;
+    padding: 0.5vw;
     box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 0.1vw solid #ccc;
+    border-radius: 0.4vw;
 }
 
 button {
     width: 100%;
-    padding: 10px 0;
+    padding: 0.5vw 0;
     background-color: orange;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 1vw;
     cursor: pointer;
     margin-top: 5vh;
 }
