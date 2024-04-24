@@ -109,29 +109,32 @@
   
   <style scoped>
   .analytics-view {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    background-color: rgb(46, 46, 46);
-    min-height: 100vh;
-    justify-content: center;
-    margin-bottom: 10vh; 
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: rgb(46, 46, 46);
+      min-height: 100vh;
+      justify-content: flex-start; 
+      padding-top: 5vh;
   }
   
   #myChart {
-    max-width: 600px;
-    max-height: 400px; 
+    max-width: 800px; 
+    max-height: 500px; 
+    width: 100%; 
+    height: auto; 
   }
   
   select {
-  margin: 20px 0;
-  padding: 8px 16px; /* Add padding */
-  border-radius: 8px; /* Rounded corners */
-  background: white; /* Optional: changes background color */
-  border: 1px solid #ccc; /* Optional: adds a light border */
-  outline: none; /* Optional: removes focus outline */
-  cursor: pointer; /* Optional: changes cursor on hover */
+      margin: 20px 0;
+      padding: 8px 16px; 
+      border-radius: 8px;
+      background: white; 
+      border: 1px solid #ccc; 
+      outline: none; 
+      cursor: pointer; 
   }
-</style>
+  </style>
+  
   
