@@ -59,8 +59,6 @@ export default {
                 if (this.password == this.confirmPassword) {
                     const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
                     const user = userCredential.user;
-                    const userDocRef = doc(db, 'Users', user.uid);
-                    await setDoc(userDocRef, { uid: user.uid, friendRequests: [], friends: [] });
                     alert('Successfully Signed Up');
                     this.$router.push('/setupprofile');
                 } else {
