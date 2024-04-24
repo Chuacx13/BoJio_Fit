@@ -66,10 +66,13 @@ export default {
                 }
             }
         },
-        async fetchUserWorkouts(db, userId, username) {
+        async fetchUserWorkouts(db, userId) {
             const userDoc = doc(db, 'Users', userId);
             const userSnapshot = await getDoc(userDoc);
-            const profilePic = userSnapshot.exists() ? userSnapshot.data().profilePicture : this.defaultProfilePic;
+            const userProfile = userSnapshot.data();
+            const username = userProfile ? userProfile.username : 'Unknown User'; 
+            const profilePic = userProfile && userProfile.profilePicture ? userProfile.profilePicture : this.defaultProfilePic;
+
             const workoutsDoc = doc(db, 'Workouts', userId);
             const workoutSnapshot = await getDoc(workoutsDoc);
             if (workoutSnapshot.exists()) {
