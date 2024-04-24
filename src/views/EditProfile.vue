@@ -119,7 +119,7 @@ export default {
     display: flex;
     justify-content: center;
     background-color: rgb(46, 46, 46);
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     min-height: 100vh; 
     text-align: center;
@@ -127,38 +127,43 @@ export default {
 
 .form {
     margin-top: 10vh;
+    width: 100%;
+    height: 60%;
+    margin-bottom: 10vh;
 }
 
 .form-group {
     display: flex;
     align-items: center;
     margin-top: 5vh;
-
 }
 
 label {
-    width: 80px;
-    margin-right: 10px;
+    width: 30%;
+    margin-right: 2%;
     display: block;
     color: white;
+    font-size: 0.7vw;
 }
 
 input, select {
     flex: 1;
-    padding: 8px;
+    padding: 0.8vw;
     box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 0.1vw solid #ccc;
+    border-radius: 0.4vw;
+    font-size: 0.7vw;
 }
 
 button {
     width: 100%;
-    padding: 10px 0;
+    padding: 1vw 0;
     background-color: orange;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 0.4vw;
     cursor: pointer;
     margin-top: 5vh;
+    font-size: 0.7vw;
 }
 </style>

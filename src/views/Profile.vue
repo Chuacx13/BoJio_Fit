@@ -175,7 +175,8 @@ export default {
 }
 
 .user-item strong {
-    min-width: 5vw; 
+    min-width: 5vw;
+    font-size: 1vw;
 }
 
 .user-item span {
@@ -194,9 +195,9 @@ export default {
 
 .edit-profile-button {
     background-color: orange;
-    border-radius: 10px;
+    border-radius: 1vw;
     border: none;
-    padding: 5px 10px;
+    padding: 0.5vw 1vw;
     cursor: pointer;
     margin-left: auto;
 }
@@ -212,7 +213,7 @@ export default {
     background-color: rgb(46, 46, 46);
     width: 80vw;
     height: 60vh;
-    padding: 20px;
+    padding: 2vw;
     margin-top: 5vh;
     display: flex;
     justify-content: center;
@@ -230,8 +231,8 @@ export default {
     width: 30%; 
     height: 100%; 
     background-color: white;
-    border-radius: 10px;
-    margin: 0 30px;
+    border-radius: 1vw;
+    margin: 0 3vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -242,8 +243,8 @@ export default {
     width: 30%;
     height: 100%; 
     background-color: white;
-    border-radius: 10px;
-    margin: 0 30px;
+    border-radius: 1vw;
+    margin: 0 3vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -253,8 +254,8 @@ export default {
     width: 30%; 
     height: 100%; 
     background-color: white;
-    border-radius: 10px;
-    margin: 0 30px; 
+    border-radius: 1vw;
+    margin: 0 3vw; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -264,6 +265,7 @@ export default {
     max-height: 5%;
     height: 5%;
     color: orange;
+    font-size: 1vw;
 }
 
 .badge-container {
@@ -282,6 +284,7 @@ export default {
     height: 10%;
     font-size: 1vw;
     color: orange;
+    margin-bottom: 1vh;
 }
 
 .badge-text {
@@ -294,7 +297,7 @@ export default {
 }
 
 .badge-attained {
-    font-size: 1vw;
+    font-size: 0.8vw;
     color: orange;
 }
 
@@ -304,11 +307,11 @@ export default {
 
 .view-analytics-button {
     background-color: orange;
-    border-radius: 10px;
+    border-radius: 1vw;
     border: none;
     padding: 1vh 5vw;
     cursor: pointer;
     margin-left: auto;
+    min-height: 20%;
 }
-
 </style>
