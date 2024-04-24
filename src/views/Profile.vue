@@ -7,19 +7,19 @@
                     <strong>{{ userInfo.username }}</strong>
                 </div>
                 <div class="user-item">
-                    <strong>Age: {{ userInfo.Age }}</strong>
+                    <strong>Age: {{ userInfo.age }}</strong>
                 </div>
                 <div class="user-item">
-                    <strong>Gender: {{ userInfo.Gender }}</strong>
+                    <strong>Gender: {{ userInfo.gender }}</strong>
                 </div>
                 <div class="user-item">
-                    <strong>Height: {{ userInfo.Height }}</strong> 
+                    <strong>Height: {{ userInfo.height }}</strong> 
                 </div>
                 <div class="user-item">
-                    <strong>Weight: {{ userInfo.Weight }}</strong> 
+                    <strong>Weight: {{ userInfo.weight }}</strong> 
                 </div>
                 <div class="user-item">
-                    <strong>Tele: {{ userInfo.Telegram }}</strong> 
+                    <strong>Tele: {{ userInfo.telegram }}</strong> 
                 </div>
                 <button class="edit-profile-button" @click="redirectToEditProfile">Edit Profile</button>
             </div>

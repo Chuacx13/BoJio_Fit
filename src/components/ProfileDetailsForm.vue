@@ -79,11 +79,11 @@ export default {
                 if (docSnap.exists()) {
                     const userData = docSnap.data();
                     this.name = userData.username; 
-                    this.age = userData.Age;
-                    this.gender = userData.Gender;
-                    this.height = userData.Height;
-                    this.weight = userData.Weight;
-                    this.telegram = userData.Telegram;
+                    this.age = userData.age;
+                    this.gender = userData.gender;
+                    this.height = userData.height;
+                    this.weight = userData.weight;
+                    this.telegram = userData.telegram;
                     this.profilePicture = userData.profilePicture;
                 }
             } catch (err) {
@@ -101,11 +101,11 @@ export default {
                 if (docSnap.exists()) {
                     await setDoc(userDocRef, {
                         username: this.name,
-                        Age: this.age,
-                        Gender: this.gender,
-                        Height: this.height,
-                        Weight: this.weight,
-                        Telegram: this.telegram,
+                        age: this.age,
+                        gender: this.gender,
+                        height: this.height,
+                        weight: this.weight,
+                        telegram: this.telegram,
                         profilePicture: this.profilePicture,
                         uid: this.user.uid, 
                         friendRequests: docSnap.data().friendRequests, 
@@ -115,11 +115,11 @@ export default {
                 } else {
                     await setDoc(userDocRef, {
                         username: this.name,
-                        Age: this.age,
-                        Gender: this.gender,
-                        Height: this.height,
-                        Weight: this.weight,
-                        Telegram: this.telegram,
+                        age: this.age,
+                        gender: this.gender,
+                        height: this.height,
+                        weight: this.weight,
+                        telegram: this.telegram,
                         profilePicture: this.profilePicture,
                         uid: this.user.uid, 
                         friendRequests: [], 
