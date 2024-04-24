@@ -1,115 +1,18 @@
 <template>
     <div class = "editProfile-view">
-        <form @submit.prevent="submitForm">
-            <div class="form">    
-                <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" v-model="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="age">Age:</label>
-                    <input type="number" id="age" v-model="age" required>
-                </div>
-                <div class="form-group">
-                    <label for="gender">Gender:</label>
-                    <select id="gender" v-model="gender" required>
-                        <option value="">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="height">Height:</label>
-                    <input type="number" id="height" v-model="height" required>
-                </div>
-                <div class="form-group">
-                    <label for="weight">Weight:</label>
-                    <input type="number" id="weight" v-model="weight" required>
-                </div>
-                <div class="form-group">
-                    <label for="tele">Telegram Handle:</label>
-                    <input type="text" id="telegram" v-model="telegram" required>
-                </div>
-                <div class="form-group">
-                    <label for="profilePicture">Profile Picture:</label>
-                    <input type="file" id="profilePicture" accept="image/*" @change="handleProfilePicChange">
-                </div>
-                <button type="submit">Save</button>
-            </div>    
-        </form>
+        <h1> Enter your profile details below </h1>
+        <ProfileDetailsForm/>
     </div>
 </template>
 
 <script>
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import ProfileDetailsForm from '@/components/ProfileDetailsForm.vue';
 
 export default {
     name: "EditProfile",
 
-    data() {
-        return {
-             user: false,
-             name: '',
-             age: '',
-             gender: '',
-             height: '',
-             weight: '',
-             telegram: '',
-             profilePicture: null
-        }
-    }, 
-
-    mounted() {
-        const auth = getAuth();
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                this.user = user;
-            }
-        })
-    },
-    
-    methods: {
-        async submitForm() {
-            console.log("submitForm method called");
-            const db = getFirestore();
-            // Get document reference from "Workouts" collection with unique "uid" document 
-            const UserDocRef = doc(db, 'Users', this.user.uid);
-
-            try {
-                const docSnap = await getDoc(UserDocRef);
-
-                await setDoc(UserDocRef, {
-                    username: this.name,
-                    Age: this.age,
-                    Gender: this.gender,
-                    Height: this.height,
-                    Weight: this.weight,
-                    Telegram: this.telegram,
-                    profilePicture: this.profilePicture
-                }, {merge: true});
-
-                this.$router.push({ name: 'Home'});
-            } catch (error) {
-                console.error(error);
-            }
-        },
-        async handleProfilePicChange(event) {
-            const file = event.target.files[0];
-            const storage = getStorage();
-            const storageRef = ref(storage, `profile_pictures/${this.user.uid}/${file.name}`);
-
-            try {
-                const snapshot = await uploadBytesResumable(storageRef, file);
-                const dlURL = await getDownloadURL(snapshot.ref);
-                this.profilePicture = dlURL;
-                console.log("Download URL:", dlURL);
-            } catch (error) {
-                console.error("Error uploading image:", error);
-            }   
-        }
+    components: { 
+        ProfileDetailsForm
     }
 }
 </script>
@@ -117,7 +20,8 @@ export default {
 <style scoped>
 .editProfile-view {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     background-color: rgb(46, 46, 46);
     min-height: 100vh;
     width: 100%;
@@ -125,45 +29,11 @@ export default {
     text-align: center;
 }
 
-.form {
-    margin-top: 10vh;
-    width: 100%;
-    height: 60%;
-    margin-bottom: 10vh;
-}
-
-.form-group {
-    display: flex;
-    align-items: center;
-    margin-top: 5vh;
-}
-
-label {
-    width: 30%;
-    margin-right: 2%;
-    display: block;
-    color: white;
-    font-size: 0.7vw;
-}
-
-input, select {
-    flex: 1;
-    padding: 0.8vw;
-    box-sizing: border-box;
-    border: 0.1vw solid #ccc;
-    border-radius: 0.4vw;
-    font-size: 0.7vw;
-}
-
-button {
-    width: 100%;
-    padding: 1vw 0;
-    background-color: orange;
-    color: white;
-    border: none;
-    border-radius: 0.4vw;
-    cursor: pointer;
-    margin-top: 5vh;
-    font-size: 0.7vw;
+h1 { 
+    font-size: 20px;
+    font-weight: 900;
+    color: orange;
+    text-align: center;
+    margin-top: 20px;
 }
 </style>
