@@ -164,7 +164,8 @@ export default {
 }
 
 .user-item strong {
-    min-width: 100px; 
+    min-width: 5vw;
+    font-size: 1vw;
 }
 
 .user-item span {
@@ -181,17 +182,26 @@ export default {
   background-color: rgb(46, 46, 46); 
 }
 
+.edit-profile-button {
+    background-color: orange;
+    border-radius: 1vw;
+    border: none;
+    padding: 0.5vw 1vw;
+    cursor: pointer;
+    margin-left: auto;
+}
+
 .profile-picture {
-    width: 80px; 
-    height: auto; 
+    width: 6vw; 
+    height: 8vh; 
+    border-radius: 50%;
     margin-right: 5vw;
 }
 
 .badges-info {
-    background-color: rgb(46, 46, 46);
     width: 80vw;
-    height: 60vh;
-    padding: 20px;
+    height: auto; 
+    padding: 2vw;
     margin-top: 5vh;
     display: flex;
     justify-content: center;
@@ -205,35 +215,14 @@ export default {
     width: 100vw;
 }
 
-.number-of-workouts {
-    width: 30%; 
-    height: 100%; 
-    background-color: white;
-    border-radius: 10px;
-    margin: 0 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    
-}
-
-.number-of-workout-hours {
-    width: 30%;
-    height: 100%; 
-    background-color: white;
-    border-radius: 10px;
-    margin: 0 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
+.number-of-workouts,
+.number-of-workout-hours,
 .number-of-badges {
     width: 30%; 
     height: 100%; 
     background-color: white;
-    border-radius: 10px;
-    margin: 0 30px; 
+    border-radius: 1vw;
+    margin: 0 1vw; /* Adjust the margin as needed */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -243,24 +232,30 @@ export default {
     max-height: 5%;
     height: 5%;
     color: orange;
+    font-size: 1vw;
 }
 
 .badge-container {
     height: 80%;
     background-color: white;
     position: relative;
+    width: 100%;
+    height: auto;
 }
 
 .workout-badge {
     width: 100%;
-    height: 80%;
+    height: auto;
 }
 
 .quantity-indicator {
-    margin-top: auto;
     height: 10%;
     font-size: 1vw;
     color: orange;
+    margin-top: 0vh;
+    margin-bottom: 1vh;
+    width: 100%;
+    height: auto;
 }
 
 .badge-text {
@@ -273,8 +268,34 @@ export default {
 }
 
 .badge-attained {
-    font-size: 1vw;
+    font-size: 0.8vw;
     color: orange;
 }
+
+.view-analytics {
+    margin-top: 2vh;
+}
+
+.view-analytics-button, .edit-profile-button {
+    font-size: 1vw;
+    background-color: orange;
+    border-radius: 1vw;
+    border: none;
+    padding: 1vh 2vw;
+    cursor: pointer;
+    margin-left: auto;
+    min-height: 20%;
+    color: white; 
+}
+
+.view-analytics-button { 
+    position: relative; 
+    display: flex;
+}
+.profile-picture {
+    width: 4vw;
+    height: 4vw;  
+    border-radius: 50%;
+    margin-right: 5vw;
+}
 </style>
-  

@@ -13,13 +13,13 @@
                     <strong>Gender: {{ userInfo.gender }}</strong>
                 </div>
                 <div class="user-item">
-                    <strong>Height: {{ userInfo.height }}</strong> 
+                    <strong>Height: {{ userInfo.height }} cm</strong> 
                 </div>
                 <div class="user-item">
-                    <strong>Weight: {{ userInfo.weight }}</strong> 
+                    <strong>Weight: {{ userInfo.weight }} kg</strong> 
                 </div>
                 <div class="user-item">
-                    <strong>Tele: {{ userInfo.telegram }}</strong> 
+                    <strong>Tele: @{{ userInfo.telegram }}</strong> 
                 </div>
                 <button class="edit-profile-button" @click="redirectToEditProfile">Edit Profile</button>
             </div>
@@ -210,9 +210,8 @@ export default {
 }
 
 .badges-info {
-    background-color: rgb(46, 46, 46);
     width: 80vw;
-    height: 60vh;
+    height: auto; 
     padding: 2vw;
     margin-top: 5vh;
     display: flex;
@@ -227,35 +226,14 @@ export default {
     width: 100vw;
 }
 
-.number-of-workouts {
-    width: 30%; 
-    height: 100%; 
-    background-color: white;
-    border-radius: 1vw;
-    margin: 0 3vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    
-}
-
-.number-of-workout-hours {
-    width: 30%;
-    height: 100%; 
-    background-color: white;
-    border-radius: 1vw;
-    margin: 0 3vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
+.number-of-workouts,
+.number-of-workout-hours,
 .number-of-badges {
     width: 30%; 
     height: 100%; 
     background-color: white;
     border-radius: 1vw;
-    margin: 0 3vw; 
+    margin: 0 1vw; /* Adjust the margin as needed */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -272,19 +250,23 @@ export default {
     height: 80%;
     background-color: white;
     position: relative;
+    width: 100%;
+    height: auto;
 }
 
 .workout-badge {
     width: 100%;
-    height: 80%;
+    height: auto;
 }
 
 .quantity-indicator {
-    margin-top: auto;
     height: 10%;
     font-size: 1vw;
     color: orange;
+    margin-top: 0vh;
     margin-bottom: 1vh;
+    width: 100%;
+    height: auto;
 }
 
 .badge-text {
@@ -305,13 +287,26 @@ export default {
     margin-top: 2vh;
 }
 
-.view-analytics-button {
+.view-analytics-button, .edit-profile-button {
+    font-size: 1vw;
     background-color: orange;
     border-radius: 1vw;
     border: none;
-    padding: 1vh 5vw;
+    padding: 1vh 2vw;
     cursor: pointer;
     margin-left: auto;
     min-height: 20%;
+    color: white; 
+}
+
+.view-analytics-button { 
+    position: relative; 
+    display: flex;
+}
+.profile-picture {
+    width: 4vw;
+    height: 4vw;  
+    border-radius: 50%;
+    margin-right: 5vw;
 }
 </style>
