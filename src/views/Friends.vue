@@ -2,10 +2,10 @@
     <div class = "friends-view">
         <div class="left-container">
             <div class="left-text">
-                <h3><span class="white-text">FIND YOUR</span><br/><span class="orange-text">FRIEND</span></h3>
+                <h3><span class="orange-text">FIND YOUR</span><br/><span class="white-text">FRIEND</span></h3>
             </div>
             <div class="encouragement-text">
-                <p>Curious about how<br>your friend is doing?<br>Click their profile to find out more!</p>
+                <p>Curious about how your friend is doing?<br>Click their profile to find out more!</p>
             </div>
         </div>
         <div class="right-container">
@@ -54,7 +54,6 @@ export default {
                 if (userDocSnapshot.exists()) {
                     const userData = userDocSnapshot.data();
                     this.friends = userData.friends;
-                    console.log(this.friends);
                 } else {
                     console.log('error loading friends');
                 }
@@ -72,22 +71,24 @@ export default {
 <style scoped>
 .friends-view {
     display: flex;
+    min-height: 100vh;
     background-color: rgb(46, 46, 46);
-    min-height: 100vw;
 }
 
 .left-container {
-    width: 60%; 
-    position: fixed;
+    width: 40%; 
+    position: absolute;
+    display: flex; 
+    flex-direction: column; 
     background-color: #2E2E2E;
-    height: 80vh;
+    height: 100%;
     overflow-y: auto;
 }
 
 .left-text h3 {
     position: absolute;
     left: 10%;
-    top: 40%;  
+    top: 35%;  
     font-size: 4vw;
     margin: 0; 
     text-align: left;
@@ -104,66 +105,51 @@ export default {
 }
 
 .encouragement-text { 
+    margin-top: 3vh;
     position: absolute;
     left: 10%;
-    top: 45%;
+    top: 40%;
     transform: translateY(100%);
     text-align: left; 
     color: white;
-    font-size: 1.2vmax; 
+    font-size: 1.1vw; 
     font-weight: normal; 
-    margin: 1; 
     white-space: nowrap; 
  }
-
-.friends-request-header {
+    
+ .right-container {
     position: relative;
-    top: 10%;
-    color: orange;
-    align-items: center;
-    margin-top: 4.4vh;
-    margin-bottom: 2.2vh;
-    font-size: 2vw;
-}
-
-.right-container {
     width: 50%; 
-    margin-left: 40%; 
-    margin-top: 2.2vh;
+    left: 40%; 
     overflow-y: auto;
     background-color: #2E2E2E;
     color: white;
-    display: flex;
 }
+
 
 .friends-header {
-    position: absolute;
-    top: 10%;
     color: orange;
-    align-items: center;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    font-size: 30px;
+    font-size: 2vw; 
 }
 
+
 .friends-display {
-    position: absolute;
-    top: 20%;
-    width: 40%;
-    align-items: center;
-    margin-top: 20px;
-    padding: 30px;
-    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-    border-radius: 10px;
+    position: relative;
+    width: 50%; 
+    background-color: #3A3A3A;
+    border-radius: 0.5vw;
     color: white;
-    font-size: 25px;
+    font-size: 1vw;
+    margin: 0; 
+    padding: 0 0.5vw;
 }
 
 .friends-display li {
+    justify-content: space-between;
     list-style: none;
     display: flex;
     position: relative; 
-    padding: 2vh 2vw; 
+    padding: 1vh 0.2vw;
     transition: background-color 0.3s; /* Add smooth transition */
 }
 
@@ -172,8 +158,7 @@ export default {
 }
 
 .friends-display li span {
-    font-size: 4vmin;
-    margin: 1.1vmin;
+    font-size: 1vw;
     width: 50%;
 }
 
@@ -183,19 +168,17 @@ export default {
 }
 
 .view-profile-button {
-    padding: 15px 30px;
-    min-width: 130px;
-    margin-left: 2.5vw;
-    margin-right: 2.5vw;
+    font-size: 0.5vw;
+    padding: 0.5vw;
     color: white;
-    background-color: blue;
+    background-color: orange;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5vw;
     cursor: pointer;
     transition: background-color 0.3s ease; /* Smooth background color transition */
 }
 
 .view-profile-button:hover {
-    background-color: rgb(42, 42, 197); /* Darker color on hover */
+    background-color: green; /* Darker color on hover */
 }
 </style>
