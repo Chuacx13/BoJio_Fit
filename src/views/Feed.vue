@@ -84,6 +84,7 @@ export default {
         },
 
         async fetchWorkouts() {
+            this.workouts = []; 
             const db = getFirestore();
             const auth = getAuth();
             onAuthStateChanged(auth, async (user) => {
@@ -101,7 +102,6 @@ export default {
                 }
             });
         }
-
     }
 }
 </script>
@@ -178,8 +178,8 @@ export default {
 }
 
 .profile-pic {
-    width: 80px;
-    height: 80px;
+    width: 4vw;
+    height: 4vw;
     border-radius: 50%;
     margin-left: 10px; 
     margin-bottom: 25%;
