@@ -93,52 +93,51 @@ export default {
         },
 
         async submitForm() {
-    const db = getFirestore();
-    const userDocRef = doc(db, 'Users', this.user.uid);
-    const docSnap = await getDoc(userDocRef);
+            const db = getFirestore();
+            const userDocRef = doc(db, 'Users', this.user.uid);
+            const docSnap = await getDoc(userDocRef);
 
-    const isDuplicateUsername = await this.checkDuplicateUsername(this.name);
-    if (isDuplicateUsername) {
-        console.error('Username already exists. Please choose a different username.');
-        alert('Username already exists. Please choose a different username.');
-        return;
-    }
+            const isDuplicateUsername = await this.checkDuplicateUsername(this.name);
+            if (isDuplicateUsername) {
+                console.error('Username already exists. Please choose a different username.');
+                alert('Username already exists. Please choose a different username.');
+                return;
+            }
 
-    try {
-        if (docSnap.exists()) {
-            await setDoc(userDocRef, {
-                username: this.name,
-                age: this.age,
-                gender: this.gender,
-                height: this.height,
-                weight: this.weight,
-                telegram: this.telegram,
-                profilePicture: this.profilePicture || defaultProfilePic,
-                uid: this.user.uid, 
-                friendRequests: docSnap.data().friendRequests, 
-                friends: docSnap.data().friends
-            }, {merge: true});
-            this.$router.push({ name: 'Profile' });
-        } else {
-            await setDoc(userDocRef, {
-                username: this.name,
-                age: this.age,
-                gender: this.gender,
-                height: this.height,
-                weight: this.weight,
-                telegram: this.telegram,
-                profilePicture: defaultProfilePic, 
-                uid: this.user.uid, 
-                friendRequests: [], 
-                friends: []
-            })
-            this.$router.push({ name: 'Home' });
-        }
-    } catch (error) {
-        console.error(error);
-    }
-},
-
+            try {
+                if (docSnap.exists()) {
+                    await setDoc(userDocRef, {
+                        username: this.name,
+                        age: this.age,
+                        gender: this.gender,
+                        height: this.height,
+                        weight: this.weight,
+                        telegram: this.telegram,
+                        profilePicture: this.profilePicture || defaultProfilePic,
+                        uid: this.user.uid, 
+                        friendRequests: docSnap.data().friendRequests, 
+                        friends: docSnap.data().friends
+                    }, {merge: true});
+                    this.$router.push({ name: 'Profile' });
+                } else {
+                    await setDoc(userDocRef, {
+                        username: this.name,
+                        age: this.age,
+                        gender: this.gender,
+                        height: this.height,
+                        weight: this.weight,
+                        telegram: this.telegram,
+                        profilePicture: defaultProfilePic, 
+                        uid: this.user.uid, 
+                        friendRequests: [], 
+                        friends: []
+                    })
+                    this.$router.push({ name: 'Home' });
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        },
 
         async handleProfilePicChange(event) {
             const file = event.target.files[0];

@@ -5,7 +5,7 @@
           <h3><span class="orange-text">WORKOUT</span><br/><span class="white-text">FEED</span></h3>
         </div>
         <div class="encouragement-text">
-          <p>View the latest workouts<br>of your friends</p>
+          <p>View the latest workouts<br>of your friends!</p>
         </div>
       </div>
   
@@ -198,6 +198,7 @@ export default {
     margin-left: 1vw; 
     margin-top: 40%; 
 }
+
 </style>
 
 
