@@ -30,10 +30,10 @@ export default {
 }
 
 h1 { 
-    font-size: 20px;
+    font-size: 1vw;
     font-weight: 900;
     color: orange;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 1vh;
 }
 </style>
