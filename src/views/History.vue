@@ -52,7 +52,8 @@ export default {
       workouts: [],
       searchQuery: '', 
       startDate: null, 
-      endDate: null
+      endDate: null, 
+      currDuration: null,
     }
   },
 
@@ -78,12 +79,25 @@ export default {
     },
 
     async deleteWorkout(index) {
-      this.workouts.splice(index, 1);
+      try {
+        this.currDuration = this.workouts[index].duration;
+        this.workouts.splice(index, 1);
 
-      const db = getFirestore();
-      const workoutDocRef = doc(db, 'Workouts', this.user.uid);
+        const db = getFirestore();
+        const workoutDocRef = doc(db, 'Workouts', this.user.uid);
+        await updateDoc(workoutDocRef, { workoutList: this.workouts });
 
-      await updateDoc(workoutDocRef, { workoutList: this.workouts });
+        const badgesDocRef = doc(db, 'Badges', this.user.uid);
+        const docBadgesSnap = await getDoc(badgesDocRef);
+        const currNumofWorkouts = docBadgesSnap.data().totalNumofWorkouts;
+        const currWorkoutMinutes = docBadgesSnap.data().totalWorkoutMinutes;
+        await updateDoc(badgesDocRef, { 
+          totalNumofWorkouts: currNumofWorkouts - 1,
+          totalWorkoutMinutes: currWorkoutMinutes - this.currDuration
+        })
+      } catch (error) {
+        console.error(error);
+      }
     }, 
 
     editWorkout(workoutIndex) {
