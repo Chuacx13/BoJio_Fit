@@ -42,7 +42,7 @@
                         <div class = "badge-text"> {{ flooredWorkoutHours > 0 ? flooredWorkoutHours + 'TOTAL HOURS' : 'NO BADGES YET' }} </div>
                         <strong class = "badge-attained"> {{ flooredWorkoutHours > 0 ? flooredWorkoutHours + ' WORKOUT HOURS BADGE ATTAINED!' : 'NO WORKOUT HOURS BADGE ATTAINED YET!' }} </strong>
                     </div>
-                    <strong class = "quantity-indicator"> Current Number of Workout Hours : {{ calculateTotalHours().toFixed(2) > 0 ? calculateTotalHours.toFixed(2) : 0 }} </strong>
+                    <strong class = "quantity-indicator"> Current Number of Workout Hours : {{ calculateTotalHours }} </strong>
                 </div>
 
                 <div class="number-of-badges">
@@ -104,6 +104,13 @@ export default {
             let numberOfWorkoutBadges = this.flooredWorkouts / 25;
             let numberOfWorkoutHourBadges = this.flooredWorkoutHours / 25;
             return numberOfWorkoutBadges + numberOfWorkoutHourBadges;
+        },
+        calculateTotalHours() {
+            if (this.badgeInfo.totalWorkoutMinutes) {
+                return (this.badgeInfo.totalWorkoutMinutes/60).toFixed(2);
+            } else {
+                return 0;
+            }
         }
     },
 
@@ -130,12 +137,11 @@ export default {
              const docSnap = await getDoc(workoutInfoRef);
              if (docSnap.exists()) {
                 this.badgeInfo = docSnap.data();
+                console.log(this.badgeInfo.totalNumofWorkouts);
+                console.log(this.badgeInfo.totalWorkoutMinutes / 60);
              } else {
                 console.error("Workout information not found")
              }
-        },
-        calculateTotalHours() {
-            return this.badgeInfo.totalWorkoutMinutes / 60;
         },
         async loadDefaultProfilePic() {
             try {
