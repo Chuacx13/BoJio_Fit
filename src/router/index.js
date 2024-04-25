@@ -14,6 +14,7 @@ import EditProfile from '@/views/EditProfile.vue'
 import NotFound from '@/views/NotFound.vue'
 import SetUpProfile from '@/views/SetUpProfile.vue'
 import FriendProfile from '@/views/FriendProfile.vue'
+import EditWorkout from '@/views/EditWorkout.vue'
 
 const routes = [
     {
@@ -90,6 +91,12 @@ const routes = [
         path: '/friendprofile/:friendId',
         name: 'FriendProfile',
         component: FriendProfile,
+        props: true
+    }, 
+    {
+        path: '/editworkout/:workoutindex',
+        name: 'EditWorkout',
+        component: EditWorkout,
         props: true
     }
 ]
