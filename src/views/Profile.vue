@@ -29,30 +29,30 @@
                     <h3 class = "badge-title"> NUMBER OF WORKOUTS </h3>
                     <div class = "badge-container">
                         <img src="@/assets/badge_icon1.png" alt="Badge Icon" class = "workout-badge">
-                        <div class = "badge-text"> {{ flooredWorkouts }} WORKOUTS </div>
+                        <div class = "badge-text"> {{ flooredWorkouts > 0 ? flooredWorkouts + 'WORKOUTS' : 'NO BADGES YET' }} </div>
                         <strong class = "badge-attained"> {{ flooredWorkouts > 0 ? flooredWorkouts + ' WORKOUT BADGE ATTAINED!' : 'NO WORKOUT BADGE ATTAINED YET!' }} </strong>
                     </div>
-                    <strong class = "quantity-indicator"> Current Number of Workouts : {{ workoutInfo.length }}</strong>
+                    <strong class = "quantity-indicator"> Current Number of Workouts : {{ badgeInfo.totalNumofWorkouts > 0 ? badgeInfo.totalNumofWorkouts : 0 }}</strong>
                 </div>
 
                 <div class="number-of-workout-hours">
                     <h3 class = "badge-title"> NUMBER OF WORKOUT HOURS</h3>
                     <div class = "badge-container">
                         <img src="@/assets/badge_icon1.png" alt="Badge Icon" class = "workout-badge">
-                        <div class = "badge-text"> {{ flooredWorkoutHours }} TOTAL HOURS </div>
+                        <div class = "badge-text"> {{ flooredWorkoutHours > 0 ? flooredWorkoutHours + 'TOTAL HOURS' : 'NO BADGES YET' }} </div>
                         <strong class = "badge-attained"> {{ flooredWorkoutHours > 0 ? flooredWorkoutHours + ' WORKOUT HOURS BADGE ATTAINED!' : 'NO WORKOUT HOURS BADGE ATTAINED YET!' }} </strong>
                     </div>
-                    <strong class = "quantity-indicator"> Current Number of Workout Hours : {{ calculateTotalHours().toFixed(2) }} </strong>
+                    <strong class = "quantity-indicator"> Current Number of Workout Hours : {{ calculateTotalHours().toFixed(2) > 0 ? calculateTotalHours.toFixed(2) : 0 }} </strong>
                 </div>
 
                 <div class="number-of-badges">
                     <h3 class = "badge-title"> NUMBER OF BADGES </h3>
                     <div class = "badge-container">
                         <img src="@/assets/badge_icon1.png" alt="Badge Icon" class = "workout-badge">
-                        <div class = "badge-text"> {{ numberOfBadges }} TOTAL BADGES </div>
+                        <div class = "badge-text"> {{ numberOfBadges > 0 ? numberOfBadges + ' TOTAL BADGES' : 'NO BADGES YET' }} </div>
                         <strong class = "badge-attained"> {{ numberOfBadges > 1 ? numberOfBadges + ' BADGES ATTAINED!' : numberOfBadges == 1 ? '1 BADGE ATTAINED!' : 'NO BADGES ATTAINED YET!' }} </strong>
                     </div>
-                    <strong class = "quantity-indicator"> Current Number of Badges : {{ numberOfBadges }} </strong>
+                    <strong class = "quantity-indicator"> Current Number of Badges : {{ numberOfBadges > 0 ? numberOfBadges : 0 }} </strong>
                 </div>
             </div>
 
@@ -74,7 +74,7 @@ export default {
         return {
             user: false,
             userInfo: [],
-            workoutInfo: [],
+            badgeInfo: [],
             displayNumber: 0,
             defaultProfilePic: null
         }
@@ -86,7 +86,7 @@ export default {
             if (user) {
                  this.user = user
                  await this.fetchUserInfo();
-                 await this.fetchWorkoutInfo();
+                 await this.fetchBadgeInfo();
                  this.loadDefaultProfilePic();
             }
         })
@@ -94,15 +94,11 @@ export default {
 
     computed: {
         flooredWorkouts() {
-            return Math.floor(this.workoutInfo.length / 25) * 25;
+            return Math.floor(this.badgeInfo.totalNumofWorkouts / 25) * 25;
         },
         flooredWorkoutHours() {
-            let total = 0;
-            this.workoutInfo.forEach(workout => {
-                total += workout.duration / 60;
-            });
-            total = total.toFixed(2);
-            return Math.floor(total / 25) * 25
+            let numHours = this.badgeInfo.totalWorkoutMinutes / 60;
+            return Math.floor(numHours / 25) * 25
         },
         numberOfBadges() {
             let numberOfWorkoutBadges = this.flooredWorkouts / 25;
@@ -128,22 +124,18 @@ export default {
         redirectToAnalytics() {
             this.$router.push({name : 'Analytics'})
         },
-        async fetchWorkoutInfo() {
+        async fetchBadgeInfo() {
              const db = getFirestore()
-             const workoutInfoRef = doc(db, "Workouts", this.user.uid);
+             const workoutInfoRef = doc(db, "Badges", this.user.uid);
              const docSnap = await getDoc(workoutInfoRef);
              if (docSnap.exists()) {
-                this.workoutInfo = docSnap.data().workoutList;
+                this.badgeInfo = docSnap.data();
              } else {
                 console.error("Workout information not found")
              }
         },
         calculateTotalHours() {
-            let total = 0;
-            this.workoutInfo.forEach(workout => {
-                total += workout.duration / 60;
-            });
-            return total;
+            return this.badgeInfo.totalWorkoutMinutes / 60;
         },
         async loadDefaultProfilePic() {
             try {
@@ -233,7 +225,7 @@ export default {
     height: 100%; 
     background-color: white;
     border-radius: 1vw;
-    margin: 0 1vw; /* Adjust the margin as needed */
+    margin: 0 1vw; 
     display: flex;
     flex-direction: column;
     justify-content: space-between;

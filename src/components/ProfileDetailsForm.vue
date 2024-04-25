@@ -170,32 +170,36 @@ export default {
 .form-group {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 3vh;
 }
 
 label {
-    width: 80px;
-    margin-right: 10px;
+    width: 8vw;
+    margin-right: 1vw;
     display: block;
     color: white;
+    font-size: 1vw;
 }
 
 input, select {
     flex: 1;
-    padding: 8px;
+    padding: 0.5vh;
     box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 0.1vh solid #ccc;
+    border-radius: 0.4vh;
+    font-size: 1vw;
 }
 
 button {
-    width: 100%;
-    padding: 10px 0;
+    width: 90%;
+    padding: 1vh 0;
     background-color: orange;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 0.4vh;
     cursor: pointer;
-    margin-top: 5vh;
+    margin-top: 3vh;
+    margin-bottom: auto;
+    font-size: 1vw;
 }
 </style>
