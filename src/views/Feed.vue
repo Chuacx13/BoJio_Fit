@@ -168,7 +168,7 @@ export default {
 .workout-entry {
     display: flex;
     justify-content: space-between;
-    align-items: center; 
+    align-items: top; 
     background-color: #3A3A3A;
     border-radius: 2vw;
     font-size: 1.2vw;
