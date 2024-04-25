@@ -43,7 +43,6 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc, getDocs, collection, query, where } from "firebase/firestore";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import defaultProfilePic from '@/assets/default_profile_pic.jpeg';
 
 export default {
     name: 'ProfileDetailsForm',
@@ -113,7 +112,7 @@ export default {
                         height: this.height,
                         weight: this.weight,
                         telegram: this.telegram,
-                        profilePicture: this.profilePicture || defaultProfilePic,
+                        profilePicture: this.profilePicture,
                         uid: this.user.uid, 
                         friendRequests: docSnap.data().friendRequests, 
                         friends: docSnap.data().friends
@@ -127,7 +126,7 @@ export default {
                         height: this.height,
                         weight: this.weight,
                         telegram: this.telegram,
-                        profilePicture: defaultProfilePic, 
+                        profilePicture: this.profilePicture,
                         uid: this.user.uid, 
                         friendRequests: [], 
                         friends: []
