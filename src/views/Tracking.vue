@@ -30,11 +30,11 @@ export default {
 
     data() {
         return {
-            user: false,
+            user: null,
             exercises: [],
-            duration: '',
+            duration: null,
             workoutName: '',
-            date: false
+            date: null
         }
     }, 
 
@@ -74,6 +74,7 @@ export default {
             const db = getFirestore();
             // Get document reference from "Workouts" collection with unique "uid" document 
             const workoutDocRef = doc(db, 'Workouts', this.user.uid);
+            // Get document reference from "Badges" collection with unique "uid" document 
             const badgesDocRef = doc(db, 'Badges', this.user.uid);
             try {
                 // Get document from "Workouts" collection with unique "uid" document 

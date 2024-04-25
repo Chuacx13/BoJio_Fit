@@ -94,7 +94,7 @@ const routes = [
         props: true
     }, 
     {
-        path: '/editworkout/:workoutindex',
+        path: '/editworkout/:workoutIndex',
         name: 'EditWorkout',
         component: EditWorkout,
         props: true

@@ -86,8 +86,8 @@ export default {
       await updateDoc(workoutDocRef, { workoutList: this.workouts });
     }, 
 
-    editWorkout(workoutindex) {
-      this.$router.push({ name:'EditWorkout', params: {workoutindex} });
+    editWorkout(workoutIndex) {
+      this.$router.push({ name:'EditWorkout', params: {workoutIndex} });
     }
   }, 
 
