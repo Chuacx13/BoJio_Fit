@@ -6,7 +6,7 @@
         </div>
         <div v-else v-for="workout in sortedWorkouts" :key="workout.id" class="workout-entry">
             <div class="workout-details">
-                <h3>{{ workout.username }}'s {{ workout.workoutName }} on {{ workout.date }}</h3>
+                <h3>{{ workout.username }} {{ workout.workoutName }} on {{ workout.date }}</h3>
                 <p><strong>Duration:</strong> {{ workout.duration }} minutes</p>
                 <p><strong>Exercises:</strong></p>
                 <ul>
@@ -54,31 +54,43 @@ export default {
         });
     },
     methods: {
-        async fetchWorkouts() {
-            const db = getFirestore();
-            await this.fetchUserWorkouts(db, this.user.uid, 'You');
-            const friendsListDoc = doc(db, 'Users', this.user.uid);
-            const friendsListSnapshot = await getDoc(friendsListDoc);
-            if (friendsListSnapshot.exists()) {
-                const friends = friendsListSnapshot.data().friends;
-                for (const friend of friends) {
-                    await this.fetchUserWorkouts(db, friend.userID, friend.username);
+        async fetchUserWorkouts(db, userId) {
+            const userDoc = doc(db, 'Users', userId);
+            const userSnapshot = await getDoc(userDoc);
+            if (userSnapshot.exists()) {
+                const userData = userSnapshot.data();
+                const profilePic = userData.profilePicture || this.defaultProfilePic;
+                const username = (this.user && this.user.uid === userId) ? "Your" : userData.username;  
+                const workoutsDoc = doc(db, 'Workouts', userId);
+                const workoutSnapshot = await getDoc(workoutsDoc);
+                if (workoutSnapshot.exists()) {
+                    const workoutData = workoutSnapshot.data().workoutList;
+                    workoutData.forEach(workout => {
+                        this.workouts.push({ ...workout, username, profilePic });
+                    });
                 }
             }
         },
-        async fetchUserWorkouts(db, userId, username) {
-            const userDoc = doc(db, 'Users', userId);
-            const userSnapshot = await getDoc(userDoc);
-            const profilePic = userSnapshot.exists() ? userSnapshot.data().profilePicture : this.defaultProfilePic;
-            const workoutsDoc = doc(db, 'Workouts', userId);
-            const workoutSnapshot = await getDoc(workoutsDoc);
-            if (workoutSnapshot.exists()) {
-                const workoutData = workoutSnapshot.data().workoutList;
-                workoutData.forEach(workout => {
-                    this.workouts.push({ ...workout, username, profilePic });
-                });
-            }
+
+        async fetchWorkouts() {
+            const db = getFirestore();
+            const auth = getAuth();
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    this.user = user;
+                    await this.fetchUserWorkouts(db, user.uid); 
+                    const friendsListDoc = doc(db, 'Users', user.uid);
+                    const friendsListSnapshot = await getDoc(friendsListDoc);
+                    if (friendsListSnapshot.exists()) {
+                        const friends = friendsListSnapshot.data().friends;
+                        for (const friend of friends) {
+                            await this.fetchUserWorkouts(db, friend.userID); 
+                        }
+                    }
+                }
+            });
         }
+
     }
 }
 </script>
