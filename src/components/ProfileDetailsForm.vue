@@ -43,6 +43,7 @@
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, setDoc, getDoc, getDocs, collection, query, where } from "firebase/firestore";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import defaultProfilePic from '@/assets/default_profile_pic.jpeg';
 
 export default {
     name: 'ProfileDetailsForm',
@@ -56,7 +57,7 @@ export default {
              height: '',
              weight: '',
              telegram: '',
-             profilePicture: null
+             profilePicture: defaultProfilePic
         }
     }, 
 

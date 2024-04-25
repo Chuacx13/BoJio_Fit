@@ -154,15 +154,6 @@ export default {
                 console.error("Workout information not found")
              }
         },
-
-        async loadDefaultProfilePic() {
-            try {
-                const { default: defaultProfilePic } = await import('@/assets/default_profile_pic.jpeg');
-                this.defaultProfilePic = defaultProfilePic;
-            } catch(error) {
-                console.error("Error loading default profile picture", error);
-            }
-        }
     }
 }
 </script>
