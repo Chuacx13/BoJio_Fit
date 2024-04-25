@@ -36,7 +36,7 @@ export default {
         return {
             user: null,
             workouts: [],
-            defaultProfilePic: '@/assets/default_profile_pic.jpeg' // Ensure this path is correct
+            defaultProfilePic: '@/assets/default_profile_pic.jpeg' 
         }
     },
     computed: {
@@ -66,13 +66,10 @@ export default {
                 }
             }
         },
-        async fetchUserWorkouts(db, userId) {
+        async fetchUserWorkouts(db, userId, username) {
             const userDoc = doc(db, 'Users', userId);
             const userSnapshot = await getDoc(userDoc);
-            const userProfile = userSnapshot.data();
-            const username = userProfile ? userProfile.username : 'Unknown User'; 
-            const profilePic = userProfile && userProfile.profilePicture ? userProfile.profilePicture : this.defaultProfilePic;
-
+            const profilePic = userSnapshot.exists() ? userSnapshot.data().profilePicture : this.defaultProfilePic;
             const workoutsDoc = doc(db, 'Workouts', userId);
             const workoutSnapshot = await getDoc(workoutsDoc);
             if (workoutSnapshot.exists()) {

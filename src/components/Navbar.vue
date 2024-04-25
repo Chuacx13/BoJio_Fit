@@ -89,7 +89,7 @@ export default {
     padding: 1vh 1.5vw; 
     text-decoration: none;
     transition: background-color 0.3s, color 0.3s;
-    font-size: 1vw; 
+    font-size: 0.8vw; 
     font-weight: bold; 
     white-space: nowrap;
     font-family: 'Times New Roman', Times, serif;
@@ -105,7 +105,7 @@ export default {
     border: none;
     cursor: pointer;
     text-decoration: none;
-    font-size: 1vw;
+    font-size: 0.8vw;
 }
 
 #btn:hover {
